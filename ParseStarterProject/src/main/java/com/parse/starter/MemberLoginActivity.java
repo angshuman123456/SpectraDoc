@@ -59,17 +59,20 @@ public class MemberLoginActivity extends AppCompatActivity {
 
         if(studentFacultySwitch.isChecked()) {
 
-            // perform faculty login
+            // write the code for faculty login
 
         } else {
 
-            // perform student login
+            // write the code for student login
         }
 
         Log.i("Info", "Login clicked");
     }
 
     public void forgotPassword(View view) {
+
+        // this function is called whenever "Forgot password" text view is called
+
         Intent forgotPasswordIntent = new Intent(getApplicationContext(), ForgotPassword.class);
         startActivity(forgotPasswordIntent);
     }
