@@ -21,7 +21,7 @@ import com.parse.ParseAnalytics;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText password, name, emailId, department, rollNumber;
+    EditText password, name, emailId, department, rollNumber, confirmPassword;
 
 
     @Override
@@ -34,19 +34,28 @@ public class RegisterActivity extends AppCompatActivity {
         department = (EditText) findViewById(R.id.dept);
         rollNumber = (EditText) findViewById(R.id.roll_number);
         password = (EditText) findViewById(R.id.password);
+        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
     public void signUp(View view) {
 
+        if(name.getText().toString().isEmpty() ||
+                emailId.getText().toString().isEmpty() ||
+                department.getText().toString().isEmpty() ||
+                rollNumber.getText().toString().isEmpty() ||
+                password.getText().toString().isEmpty() ||
+                confirmPassword.getText().toString().isEmpty()) {
+
+            Toast.makeText(this, "Above fields cannot be empty", Toast.LENGTH_SHORT).show();
+        }
+
         /*
         * This function will be called when registration button will be clicked
         * perform the registration process here
         * write only the necessary code for registration to the database here
          */
-
-        EditText confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
         // code to check if password and confirm password fields are same or not
         if( password.getText().toString().equals(confirmPassword.getText().toString())) {
