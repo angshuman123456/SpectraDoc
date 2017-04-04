@@ -47,7 +47,7 @@
     <string name="sem8"> Semester 8 </string>
     <string name="subjectCivil"> Civil Engineering </string>
     <string name="subjectIT"> Information Technology </string>
-    <string name="subjectECE"> Electronics And Communication Engineering </string>
+    <string name="subjectECE"> Electronics And &#10; Communication Engineering </string>
     <string name="subjectEE"> Electrical Engineering </string>
     <string name="subjectCSE"> Computer Science &#10; And Engineering </string>
 </resources>

@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/civil"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="34dp"
         android:layout_below="@+id/textView5"
         android:layout_alignLeft="@+id/imageView3"
         android:layout_alignStart="@+id/imageView3" />
@@ -24,21 +24,22 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/electronics"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editText6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
 
     <ImageView
         android:contentDescription="@string/content_desc"
         android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="53dp"
+        android:layout_marginLeft="27dp"
         android:src="@drawable/informationtechnology"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
     <ImageView
         android:contentDescription="@string/content_desc"
@@ -96,9 +97,10 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:textAlignment="center"
+        android:gravity="center"
         android:text="@string/subjectECE"
         android:textStyle="bold"
         android:textColor="#111111"
@@ -108,9 +110,10 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="100dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:textAlignment="center"
+        android:gravity="center"
         android:text="@string/subjectCivil"
         android:textStyle="bold"
         android:textColor="#111111"
