@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/logosit">
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:gravity="center"
+    android:background="@drawable/logoblur"
+    android:text="@string/test">
 
 </LinearLayout>

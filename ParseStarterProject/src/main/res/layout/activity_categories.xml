@@ -2,43 +2,47 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/grid_view_items"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/logoblur">
 
     <ImageView
+        android:contentDescription="@string/content_desc"
         android:id="@+id/imageView8"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/notice"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="34dp"
         android:layout_below="@+id/textView5"
         android:layout_alignLeft="@+id/imageView3"
         android:layout_alignStart="@+id/imageView3" />
 
     <ImageView
+        android:contentDescription="@string/content_desc"
         android:id="@+id/imageView6"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/notes"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editText6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
 
     <ImageView
+        android:contentDescription="@string/content_desc"
         android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginLeft="27dp"
         android:src="@drawable/assignment"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/editText6"
-        android:layout_toStartOf="@+id/editText6"
-        android:layout_marginRight="39dp"
-        android:layout_marginEnd="39dp" />
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
     <ImageView
+        android:contentDescription="@string/content_desc"
         android:id="@+id/imageView4"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -48,24 +52,24 @@
         android:layout_alignStart="@+id/imageView2" />
 
     <ImageView
+        android:contentDescription="@string/content_desc"
         android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@drawable/ebook"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_above="@+id/editText6"
-        android:layout_alignLeft="@+id/editText6"
-        android:layout_alignStart="@+id/editText6" />
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="66dp"
+        android:layout_marginEnd="66dp" />
 
     <TextView
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="@string/ebook"
-        android:textAlignment="center"
+        android:gravity="center_horizontal"
         android:textStyle="bold"
         android:textColor="#111111"
         android:layout_alignBaseline="@+id/textView3"
@@ -83,7 +87,6 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textStyle="bold"
-        android:inputType="textPersonName"
         android:text="@string/syllabus"
         android:textColor="#111111"
         android:padding="0dp"
@@ -94,10 +97,10 @@
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:textAlignment="center"
-        android:inputType="textPersonName"
+        android:gravity="center"
         android:text="@string/notes"
         android:textStyle="bold"
         android:textColor="#111111"
@@ -107,10 +110,10 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="100dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:textAlignment="center"
-        android:inputType="textPersonName"
+        android:gravity="center"
         android:text="@string/notice"
         android:textStyle="bold"
         android:textColor="#111111"
@@ -126,21 +129,9 @@
         android:textAlignment="center"
         android:textStyle="bold"
         android:textColor="#111111"
-        android:inputType="textPersonName"
         android:text="@string/assignment"
         android:layout_below="@+id/imageView3"
         android:layout_toLeftOf="@+id/editText6"
-        android:layout_toStartOf="@+id/editText6"
-        android:layout_marginRight="12dp"
-        android:layout_marginEnd="12dp" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_toStartOf="@+id/editText6" />
 
 </RelativeLayout>
-
