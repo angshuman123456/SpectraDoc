@@ -37,6 +37,7 @@
     <string name="name"> Name </string>
     <string name="emailId">Email Id</string>
     <string name="user"> User </string>
+    <string name="codeGnerated"> Code </string>
 
     <string name="assignment"> Assignment</string>
     <string name="ebook"> E-Book </string>
