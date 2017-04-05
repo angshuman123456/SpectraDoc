@@ -21,12 +21,12 @@
         android:layout_rowWeight="1"
         android:gravity="center"
         android:layout_gravity="center">
-    <ImageView
-        android:contentDescription="@string/content_desc"
-        android:id="@+id/notice_imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/notice" />
+        <ImageView
+            android:contentDescription="@string/content_desc"
+            android:id="@+id/notice_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/notice" />
         <TextView
             android:id="@+id/notice_textView"
             android:layout_width="wrap_content"
@@ -110,13 +110,13 @@
         android:layout_rowWeight="1"
         android:gravity="center"
         android:layout_gravity="center">
-    <ImageView
-        android:contentDescription="@string/content_desc"
-        android:id="@+id/syllabus_imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/syllabus" />
+        <ImageView
+            android:contentDescription="@string/content_desc"
+            android:id="@+id/syllabus_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/syllabus" />
 
         <TextView
             android:id="@+id/syllabus_textView"
