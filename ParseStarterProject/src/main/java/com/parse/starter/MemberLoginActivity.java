@@ -39,6 +39,7 @@ public class MemberLoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     public void login(View view) {

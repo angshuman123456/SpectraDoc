@@ -60,6 +60,8 @@ public class ForgotPassword extends AppCompatActivity {
 
             // update the code to the database
 
+            // email code is yet to be written
+
             Log.i("Info", "Send Code");
 
             verifyCodeActive = true;
