@@ -122,32 +122,18 @@
         android:paddingStart="4dp"
         android:paddingEnd="4dp"/>
 
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/signUp"
-            android:onClick="signUp"
-            android:text="@string/register"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:layout_marginTop="15sp"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/confirmPassword"
-            android:background="@drawable/back_button"
-            android:layout_centerHorizontal="true" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:text="@string/memberLogin"
+        android:id="@+id/signUp"
+        android:onClick="signUp"
+        android:text="@string/register"
+        android:gravity="center"
         android:textSize="20sp"
-        android:layout_below="@+id/signUp"
         android:layout_marginTop="15sp"
-        android:id="@+id/forgotPassword"
-        android:onClick="loginActivity"
-        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/confirmPassword"
+        android:background="@drawable/back_button"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

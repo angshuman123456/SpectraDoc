@@ -76,4 +76,12 @@ public class MemberLoginActivity extends AppCompatActivity {
         Intent forgotPasswordIntent = new Intent(getApplicationContext(), ForgotPassword.class);
         startActivity(forgotPasswordIntent);
     }
+
+    public void registerActivity(View view) {
+
+        // this function is called whenever "Register" text view is called
+
+        Intent registerActivityIntent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(registerActivityIntent);
+    }
 }

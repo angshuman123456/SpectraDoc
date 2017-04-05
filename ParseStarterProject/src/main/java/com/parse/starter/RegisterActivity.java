@@ -9,7 +9,6 @@
 
 
 package com.parse.starter;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -80,11 +79,4 @@ public class RegisterActivity extends AppCompatActivity {
         */
     }
 
-    public void loginActivity(View view) {
-
-        // this function is called when "Member login" Text view is clicked
-
-        Intent memberLoginActivityIntent = new Intent(getApplicationContext(), MemberLoginActivity.class);
-        startActivity(memberLoginActivityIntent);
-    }
 }

@@ -129,6 +129,17 @@
             android:textStyle="bold"
             android:onClick="forgotPassword"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="@string/register"
+            android:textSize="20sp"
+            android:id="@+id/registerScreen"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:onClick="registerActivity"/>
+
     </LinearLayout>
 
 </RelativeLayout>
