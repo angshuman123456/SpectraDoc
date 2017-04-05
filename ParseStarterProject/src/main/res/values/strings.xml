@@ -65,4 +65,7 @@
     <string name="test"> Hello </string>
 
 
+    <string name="validationCodeButtonTextChanged"> VERIFY CODE </string>
+
+
 </resources>
