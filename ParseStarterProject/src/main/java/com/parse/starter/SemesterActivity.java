@@ -1,6 +1,6 @@
 package com.parse.starter;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -69,12 +69,12 @@ public class SemesterActivity extends AppCompatActivity {
          */
 
 
-        Intent subjectsActivityIntent = new Intent();
+        Intent subjectsActivityIntent = new Intent(this, Categories.class);
 
         for(int i = 1; i <= numberOfSubjectsFetched; i++) {
 
             String subject_id = "sbuject" + Integer.toString(i);
-            subjectsActivityIntent.putExtra(subject_id, nameOfSubjects[i]);
+           // subjectsActivityIntent.putExtra(subject_id, nameOfSubjects[i]);
         }
 
         startActivity(subjectsActivityIntent);
