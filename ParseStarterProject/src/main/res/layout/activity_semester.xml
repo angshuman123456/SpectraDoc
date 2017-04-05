@@ -22,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button1"
+            android:tag="1"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_rowWeight="1"
@@ -29,13 +30,15 @@
             android:textStyle="bold"
             android:textColor="#111111"
             android:background="@drawable/back_trans"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
+            android:tag="2"
             android:layout_row="0"
             android:layout_column="1"
             android:background="@drawable/back_trans"
@@ -43,13 +46,15 @@
             android:textColor="#111111"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button3"
+            android:tag="3"
             android:layout_column="0"
             android:textStyle="bold"
             android:layout_row="1"
@@ -57,13 +62,15 @@
             android:background="@drawable/back_trans"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button4"
+            android:tag="4"
             android:background="@drawable/back_trans"
             android:layout_column="1"
             android:layout_row="1"
@@ -71,13 +78,15 @@
             android:textColor="#111111"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button5"
+            android:tag="5"
             android:layout_column="0"
             android:layout_row="2"
             android:textStyle="bold"
@@ -85,7 +94,8 @@
             android:background="@drawable/back_trans"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem6"
@@ -93,19 +103,22 @@
             android:layout_height="wrap_content"
             android:background="@drawable/back_trans"
             android:id="@+id/button6"
+            android:tag="6"
             android:layout_column="1"
             android:textStyle="bold"
             android:layout_row="2"
             android:textColor="#ffffff"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button7"
+            android:tag="7"
             android:layout_column="0"
             android:layout_row="3"
             android:textStyle="bold"
@@ -113,13 +126,15 @@
             android:layout_rowWeight="1"
             android:textColor="#ffffff"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
 
         <Button
             android:text="@string/sem8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button8"
+            android:tag="8"
             android:layout_column="1"
             android:layout_row="3"
             android:textStyle="bold"
@@ -127,6 +142,7 @@
             android:background="@drawable/back_trans"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_gravity="fill"/>
+            android:layout_gravity="fill"
+            android:onClick="fetchSemesterNumber"/>
     </GridLayout>
 </RelativeLayout>
