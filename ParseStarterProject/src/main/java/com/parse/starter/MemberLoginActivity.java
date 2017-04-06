@@ -3,7 +3,6 @@ package com.parse.starter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -60,14 +59,16 @@ public class MemberLoginActivity extends AppCompatActivity {
 
         if(studentFacultySwitch.isChecked()) {
 
-            // write the code for faculty login
+            // write the code for faculty login and move to faculty uploading activity
 
         } else {
 
-            // write the code for student login
+            // write the code for student login move to department activity
+
         }
 
-        Log.i("Info", "Login clicked");
+        // to check if the button is clicked or functioning properly
+        // Log.i("Info", "Login clicked");
     }
 
     public void forgotPassword(View view) {

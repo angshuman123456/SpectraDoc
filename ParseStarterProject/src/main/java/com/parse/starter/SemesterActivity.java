@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class SemesterActivity extends AppCompatActivity {
 
     Intent getDataFromDeptActivityIntent;
@@ -61,22 +63,15 @@ public class SemesterActivity extends AppCompatActivity {
 
     private void fetchSubjectsName(String semester, String department) {
 
-        int numberOfSubjectsFetched = 0;
-        String[] nameOfSubjects = new String[numberOfSubjectsFetched];
+        ArrayList<String> nameOfSubjects = new ArrayList<>();
 
         /* write the code to connect to db and fetch the subjects of the semester and fill the "nameOfSubjects"
         * with the name of the subjects fetched from the db
          */
 
 
-        Intent subjectsActivityIntent = new Intent(this, Categories.class);
-
-        for(int i = 1; i <= numberOfSubjectsFetched; i++) {
-
-            String subject_id = "sbuject" + Integer.toString(i);
-           // subjectsActivityIntent.putExtra(subject_id, nameOfSubjects[i]);
-        }
-
+        Intent subjectsActivityIntent = new Intent(this, Subject.class);
+        subjectsActivityIntent.putStringArrayListExtra("subjectArray", nameOfSubjects);
         startActivity(subjectsActivityIntent);
     }
 }
