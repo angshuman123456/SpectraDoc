@@ -37,6 +37,8 @@ public class Department extends AppCompatActivity {
     // will jump to semester activity and also send which dept is selected
     public void semesterSelect(View view) {
 
+        String department = "";
+
         // write the code to fetch the dept name from the database
 
         Intent semesterIntent = new Intent(this, SemesterActivity.class);
