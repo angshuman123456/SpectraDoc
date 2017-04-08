@@ -60,7 +60,7 @@
         android:layout_height="35dp"
         android:ems="10"
         android:backgroundTint="@color/cast_expanded_controller_seek_bar_progress_background_tint_color"
-        android:inputType="number"
+        android:inputType="text"
         android:layout_below="@+id/roll_number"
         android:layout_marginTop="20sp"
         android:layout_alignParentLeft="true"
