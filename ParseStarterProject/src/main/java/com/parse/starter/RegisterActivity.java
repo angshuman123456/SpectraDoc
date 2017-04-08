@@ -9,18 +9,25 @@
 
 
 package com.parse.starter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText password, name, emailId, department, rollNumber, confirmPassword;
+    EditText password, name, emailId, rollNumber, confirmPassword;
+    Spinner department;
 
 
     @Override
@@ -30,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.name);
         emailId = (EditText) findViewById(R.id.emailId);
-        department = (EditText) findViewById(R.id.dept);
+        department = (Spinner) findViewById(R.id.dept);
         rollNumber = (EditText) findViewById(R.id.roll_number);
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
@@ -42,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(name.getText().toString().isEmpty() ||
                 emailId.getText().toString().isEmpty() ||
-                department.getText().toString().isEmpty() ||
                 rollNumber.getText().toString().isEmpty() ||
                 password.getText().toString().isEmpty() ||
                 confirmPassword.getText().toString().isEmpty()) {
@@ -59,7 +65,31 @@ public class RegisterActivity extends AppCompatActivity {
         // code to check if password and confirm password fields are same or not
         if( password.getText().toString().equals(confirmPassword.getText().toString())) {
 
-            // write the signup code here
+            // write the signup codee
+            ParseUser user = new ParseUser();
+
+            user.setUsername(name.getText().toString().trim());
+            user.setPassword(password.getText().toString());
+            user.setEmail(emailId.getText().toString());
+            user.put("RollNo_Id",Integer.parseInt(rollNumber.getText().toString()));
+
+            // select the dept name from the spinner and update it into the db..
+           // user.put("Dept_Name", department.getText().toString() );
+
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if(e == null) {
+                        Log.i("SignUp", "Successful");
+
+                        Intent DepartmentIntent = new Intent(getApplicationContext(), Department.class);
+                        startActivity(DepartmentIntent);
+                    } else {
+                        Log.i("SignUp", "Failed");
+                    }
+                }
+            });
+
 
         } else {
             Toast.makeText(this, "Password field does not match with confirm password", Toast.LENGTH_SHORT).show();
