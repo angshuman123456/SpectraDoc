@@ -21,7 +21,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".MemberLoginActivity"
             android:label="@string/app_name">
             <intent-filter>
@@ -30,16 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".SemesterActivity" />
-        <activity android:name=".Department" >
-
-
-        </activity>
+        <activity android:name=".Department" />
         <activity android:name=".Categories"/>
         <activity android:name=".CategoryContent"/>
         <activity android:name=".Subject"/>
         <activity android:name=".FilesViewer"/>
+        <activity android:name=".FacultyUploadActivity"/>
 
 
     </application>

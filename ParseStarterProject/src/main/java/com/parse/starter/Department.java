@@ -40,9 +40,20 @@ public class Department extends AppCompatActivity {
         String department = "";
 
         // write the code to fetch the dept name from the database
+        if(view.getTag().toString().equals("it_textView") || view.getTag().equals("it_imageView")) {
+            department = "IT";
+        } else if(view.getTag().toString().equals("cse_textView") || view.getTag().equals("cse_imageView")) {
+            department = "CSE";
+        } else if(view.getTag().toString().equals("ee_textView") || view.getTag().equals("ee_imageView")) {
+            department = "EE";
+        } else if(view.getTag().toString().equals("ece_textView") || view.getTag().equals("ece_imageView")) {
+            department = "ECE";
+        } if(view.getTag().toString().equals("civil_textView") || view.getTag().equals("civil_imageView")) {
+            department = "CIVIL";
+        }
 
         Intent semesterIntent = new Intent(this, SemesterActivity.class);
-        semesterIntent.putExtra("department", "put the dept name here after fetching from the db");
+        semesterIntent.putExtra("department", department);
         startActivity(semesterIntent);
     }
 }

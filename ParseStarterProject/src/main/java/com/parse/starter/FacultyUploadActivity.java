@@ -3,9 +3,12 @@ package com.parse.starter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class FacultyUploadActivity extends AppCompatActivity {
@@ -13,6 +16,10 @@ public class FacultyUploadActivity extends AppCompatActivity {
     Intent memberLoginIntent;
 
     Spinner spinner_subject, spinner_category, spinner_semester;
+
+    List<String> categories;
+
+    private String selectedCategory = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,31 +35,23 @@ public class FacultyUploadActivity extends AppCompatActivity {
         spinner_category = (Spinner) findViewById(R.id.spinner_category);
 
 
+        // create an object of the list and enter the categories
+        categories = new ArrayList<>(Arrays.asList("Assignment", "E-book",
+                "Notes", "Notices", "Syllabus"));
+
+        // filling up the spinner with the help of an array adapter
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, categories);
+        spinner_category.setAdapter(arrayAdapter);
+
+        // query the dp and store the semester in the spinner_semester
+
+
         // query the dp and store the subject in the spinner_subject
-        spinner_semester.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
 
 
-        // query the dp and store the subject in the spinner_subject
-        spinner_subject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
-
-
-        // query the dp and store the category in the spinner_category
-        spinner_category.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        // static entries. Since there are only few known categories in the spinner_category
 
     }
 

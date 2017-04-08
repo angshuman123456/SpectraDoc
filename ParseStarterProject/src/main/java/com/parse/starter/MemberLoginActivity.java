@@ -3,6 +3,8 @@ package com.parse.starter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -32,6 +34,8 @@ public class MemberLoginActivity extends AppCompatActivity {
         mainActivityIntent = getIntent();
 
         loginUserId = (EditText) findViewById(R.id.loginUserId);
+        loginUserId.setInputType(InputType.TYPE_CLASS_NUMBER);
+
         loginPassword = (EditText) findViewById(R.id.loginPassword);
 
         studentFacultySwitch = (Switch) findViewById(R.id.student_faculty_switch);
@@ -42,29 +46,27 @@ public class MemberLoginActivity extends AppCompatActivity {
 
                 if(isChecked) {
                     loginUserId.setHint("Department Name");
+                    loginUserId.setInputType(InputType.TYPE_CLASS_TEXT);
                 } else {
                     loginUserId.setHint("Roll Number");
+                    loginUserId.setInputType(InputType.TYPE_CLASS_NUMBER);
                 }
             }
         });
 
     }
 
+    /*
+     * This method is called when login button is clicked.
+     * perform the login operation here
+     */
     public void login(View view) {
-
-        /*
-        * This method is called when login button is clicked.
-        * perform the login operation here
-         */
-
 
         if(loginPassword.getText().toString().isEmpty() ||
                 loginUserId.getText().toString().isEmpty()) {
 
             Toast.makeText(this, "Username or password field cannot be empty", Toast.LENGTH_SHORT).show();
         }
-
-
 
         if(studentFacultySwitch.isChecked()) {
 
@@ -81,6 +83,7 @@ public class MemberLoginActivity extends AppCompatActivity {
                     }
                 }
             });
+            userName = loginUserId.getText().toString();
             logInUser();
 
         } else {
@@ -110,14 +113,19 @@ public class MemberLoginActivity extends AppCompatActivity {
 
     private void logInUser() {
 
+        Log.i("Info", "Inside logInUser");
+
         ParseUser.logInInBackground(userName, loginPassword.getText().toString(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if(user != null) {
 
+                    Log.i("Info", "Inside loginInBackground");
                     if(studentFacultySwitch.isChecked()) {
+                        Log.i("Info", "Inside LogInBackground faculty");
                         moveToFacultyActivity();
                     } else {
+                        Log.i("Info", "Inside LogInBackground student");
                         moveToDepartmentActivity();
                     }
                 }
@@ -141,12 +149,17 @@ public class MemberLoginActivity extends AppCompatActivity {
         startActivity(registerActivityIntent);
     }
 
+    // moves to department activity after a student successfully logs in
     private void moveToDepartmentActivity() {
+
+        Log.i("Info", "moving to department activity");
         Intent departmentIntent = new Intent(this, Department.class);
         startActivity(departmentIntent);
     }
 
+    // moves to faculty file upload activity after the faculty successfully logs in
     private  void moveToFacultyActivity() {
+
         Intent facultyIntent = new Intent(this, FacultyUploadActivity.class);
         facultyIntent.putExtra("department", departmentName);
         startActivity(facultyIntent);

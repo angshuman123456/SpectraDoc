@@ -78,7 +78,6 @@
             android:drawableLeft="@drawable/user"
             android:ems="10"
             android:background="@drawable/back_button"
-            android:inputType="number"
             android:backgroundTint="@color/cast_expanded_controller_seek_bar_progress_background_tint_color"
             android:layout_marginTop="20dp"
             android:hint="@string/rollNumber"
