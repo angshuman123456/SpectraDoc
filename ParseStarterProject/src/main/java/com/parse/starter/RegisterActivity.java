@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
         // code to check if password and confirm password fields are same or not
         if( password.getText().toString().equals(confirmPassword.getText().toString())) {
 
-            // write the signup codee
+            // write the signup code
             ParseUser user = new ParseUser();
 
             user.setUsername(name.getText().toString().trim());
@@ -101,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         Log.i("Info", name.getText().toString());
         Log.i("Info", emailId.getText().toString());
-        Log.i("Info", department.getText().toString());
         Log.i("Info", rollNumber.getText().toString());
         Log.i("Info", password.getText().toString());
         Log.i("Info", confirmPassword.getText().toString());
