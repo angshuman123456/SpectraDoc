@@ -38,8 +38,6 @@
         <activity android:name=".Subject"/>
         <activity android:name=".FilesViewer"/>
         <activity android:name=".FacultyUploadActivity"/>
-
-
     </application>
 
 </manifest>

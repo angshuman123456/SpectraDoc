@@ -37,7 +37,7 @@
     <string name="name"> Name </string>
     <string name="emailId">Email Id</string>
     <string name="user"> User </string>
-    <string name="codeGnerated"> Code </string>
+    <string name="codeGenerated"> Code </string>
 
     <string name="assignment"> Assignment</string>
     <string name="ebook"> E-Book </string>
@@ -69,4 +69,9 @@
 
     <string name="upload"> Upload File </string>
     <string name="select"> Select File </string>
+
+    <string name="category"> Category </string>
+    <string name="subject"> Subject </string>
+    <string name="semester"> Semester </string>
+
 </resources>
