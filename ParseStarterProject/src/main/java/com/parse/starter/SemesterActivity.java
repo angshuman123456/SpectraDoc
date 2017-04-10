@@ -32,15 +32,15 @@ public class SemesterActivity extends AppCompatActivity {
 
     public void fetchSemesterNumber(View view) {
 
-        String semster = "semester-" + view.getTag().toString() ;
-        Log.i("Info", semster);
-        fetchSubjectsName(semster, departmentName);
+        String semester = "semester-" + view.getTag().toString() ;
+        Log.i("Info", semester);
+        fetchSubjectsName(semester, departmentName);
     }
 
     private void fetchSubjectsName(final String semester, final String department) {
 
 
-        /* write the code to connect to db and fetch the subjects of the semester and fill the "nameOfSubjects"
+        /* code to connect to db and fetch the subjects of the semester and fill the "nameOfSubjects"
         * with the name of the subjects fetched from the db
          */
 
@@ -52,22 +52,19 @@ public class SemesterActivity extends AppCompatActivity {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
 
-                Log.i("Info", department);
                 if(e == null && objects.size() > 0) {
 
-
-                    Log.i("Info", "class sort listed according to department name ");
-
                     for(ParseObject obj: objects) {
-                        Log.i("Info", obj.getString("Subject_Name"));
+                        nameOfSubjects.add(obj.getString("Subject_Name"));
                     }
                 }
             }
         });
 
+        moveToSubjectActivity();
+    }
 
-
-
+    private void moveToSubjectActivity() {
         Intent subjectsActivityIntent = new Intent(this, Subject.class);
         subjectsActivityIntent.putStringArrayListExtra("subjectArray", nameOfSubjects);
         startActivity(subjectsActivityIntent);
