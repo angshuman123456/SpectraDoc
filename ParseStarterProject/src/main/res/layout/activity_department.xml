@@ -19,7 +19,8 @@
         android:layout_below="@+id/ece_textView"
         android:layout_alignLeft="@+id/it_imageView"
         android:layout_alignStart="@+id/it_imageView"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="civil_imageView"/>
 
     <ImageView
         android:contentDescription="@string/content_desc"
@@ -30,7 +31,8 @@
         android:layout_below="@+id/cse_textView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="ece_imageView"/>
 
     <ImageView
         android:contentDescription="@string/content_desc"
@@ -42,7 +44,8 @@
         android:onClick="semesterSelect"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/ece_imageView"
-        android:layout_toStartOf="@+id/ece_imageView" />
+        android:layout_toStartOf="@+id/ece_imageView"
+        android:tag="it_imageView"/>
 
     <ImageView
         android:contentDescription="@string/content_desc"
@@ -53,7 +56,8 @@
         android:layout_alignTop="@+id/civil_imageView"
         android:layout_alignLeft="@+id/cse_imageView"
         android:layout_alignStart="@+id/cse_imageView"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="ee_imageView"/>
 
     <ImageView
         android:contentDescription="@string/content_desc"
@@ -64,7 +68,8 @@
         android:onClick="semesterSelect"
         android:layout_above="@+id/cse_textView"
         android:layout_toRightOf="@+id/ece_imageView"
-        android:layout_toEndOf="@+id/ece_imageView" />
+        android:layout_toEndOf="@+id/ece_imageView"
+        android:tag="cse_imageView"/>
 
     <TextView
         android:id="@+id/cse_textView"
@@ -79,7 +84,8 @@
         android:layout_alignBaseline="@+id/it_textView"
         android:layout_alignBottom="@+id/it_textView"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:tag="cse_textView"/>
 
     <TextView
         android:id="@+id/ee_textView"
@@ -95,7 +101,8 @@
         android:layout_below="@+id/ee_imageView"
         android:layout_alignLeft="@+id/cse_textView"
         android:layout_alignStart="@+id/cse_textView"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="ee_textView"/>
 
     <TextView
         android:id="@+id/ece_textView"
@@ -109,7 +116,8 @@
         android:textColor="#111111"
         android:layout_below="@+id/ece_imageView"
         android:layout_centerHorizontal="true"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="ece_textView"/>
 
     <TextView
         android:id="@+id/civil_textView"
@@ -124,7 +132,8 @@
         android:layout_below="@+id/civil_imageView"
         android:layout_alignLeft="@+id/civil_imageView"
         android:layout_alignStart="@+id/civil_imageView"
-        android:onClick="semesterSelect"/>
+        android:onClick="semesterSelect"
+        android:tag="civil_textView"/>
 
     <TextView
         android:id="@+id/it_textView"
@@ -140,6 +149,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp" />
+        android:layout_marginStart="17dp"
+        android:tag="it_textView"/>
 
 </RelativeLayout>

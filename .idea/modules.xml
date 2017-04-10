@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ParseStarterProject/ParseStarterProject.iml" filepath="$PROJECT_DIR$/ParseStarterProject/ParseStarterProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParseStarterProject/ParseStarterProject.iml" filepath="$PROJECT_DIR$/ParseStarterProject/ParseStarterProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpectraDoc.iml" filepath="$PROJECT_DIR$/SpectraDoc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpectraDoc1.iml" filepath="$PROJECT_DIR$/SpectraDoc1.iml" />
     </modules>
   </component>
 </project>
