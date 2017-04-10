@@ -10,7 +10,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,7 @@ public class SemesterActivity extends AppCompatActivity {
 
     Intent getDataFromDeptActivityIntent;
     String departmentName;
+    final ArrayList<String> nameOfSubjects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,46 +32,13 @@ public class SemesterActivity extends AppCompatActivity {
 
     public void fetchSemesterNumber(View view) {
 
-        String tagId = (String) view.getTag();
-
-        if(tagId.equals("1")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("2")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("3")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("4")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("5")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("6")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("7")) {
-            tagId = "semester-" + tagId;
-        }
-
-        if(tagId.equals("8")) {
-            tagId = "semester-" + tagId;
-        }
-
-        fetchSubjectsName(tagId, departmentName);
+        String semster = "semester-" + view.getTag().toString() ;
+        Log.i("Info", semster);
+        fetchSubjectsName(semster, departmentName);
     }
 
     private void fetchSubjectsName(final String semester, final String department) {
 
-        final ArrayList<String> nameOfSubjects = new ArrayList<>();
 
         /* write the code to connect to db and fetch the subjects of the semester and fill the "nameOfSubjects"
         * with the name of the subjects fetched from the db

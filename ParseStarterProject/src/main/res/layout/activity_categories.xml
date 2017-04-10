@@ -20,7 +20,9 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:tag="@string/notice"
+        android:onClick="filesView">
         <ImageView
             android:contentDescription="@string/content_desc"
             android:id="@+id/notice_imageView"
@@ -49,7 +51,9 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:tag="@string/notes"
+        android:onClick="filesView">
 
         <ImageView
             android:id="@+id/notes_imageView"
@@ -79,7 +83,9 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:tag="@string/assignment"
+        android:onClick="filesView">
 
         <ImageView
             android:id="@+id/assignment_imageView"
@@ -109,7 +115,9 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:tag="@string/syllabus"
+        android:onClick="filesView">
         <ImageView
             android:contentDescription="@string/content_desc"
             android:id="@+id/syllabus_imageView"
@@ -141,7 +149,9 @@
         android:layout_columnWeight="1"
         android:layout_rowWeight="1"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:tag="@string/ebook"
+        android:onClick="filesView">
 
         <ImageView
             android:id="@+id/ebook_imageView"

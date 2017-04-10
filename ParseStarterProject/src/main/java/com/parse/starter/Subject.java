@@ -38,7 +38,7 @@ public class Subject extends AppCompatActivity {
         for(int i = 0; i < length; i++) {
             subjectName.add("store the name of the subject here");
         }
-        ArrayAdapter<String> subjectAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, subjectName);
 
         subjectList.setAdapter(subjectAdapter);
