@@ -1,7 +1,9 @@
-package com.parse.starter;
+package com.parse.starter.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.parse.starter.R;
 
 public class FilesViewer extends AppCompatActivity {
 

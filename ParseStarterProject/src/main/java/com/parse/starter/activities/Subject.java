@@ -1,4 +1,4 @@
-package com.parse.starter;
+package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.parse.starter.R;
 
 import java.util.ArrayList;
 
@@ -27,17 +29,12 @@ public class Subject extends AppCompatActivity {
         // inflated the subjectList
         subjectList = (ListView) findViewById(R.id.subjectList);
 
-        int length = 0;
-
         // write the code to fetch the subject and store the length of the data fetched from the db and store it in the length variable
 
 
         // code to display the subjects in the list view
         ArrayList<String> subjectName = semesterActivityIntent.getStringArrayListExtra("subjectArray");
 
-        for(int i = 0; i < length; i++) {
-            subjectName.add("store the name of the subject here");
-        }
         ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, subjectName);
 
@@ -48,15 +45,12 @@ public class Subject extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 String subjectName = (String) parent.getItemAtPosition(position);
-                fetchSubjectNameFromDB(subjectName);
+                moveToCategoryActivity(subjectName);
             }
         });
     }
 
-    private void fetchSubjectNameFromDB(String subjectName) {
-
-
-        // query the database to fetch all the data about the subject
+    private void moveToCategoryActivity(String subjectName) {
 
         Intent categoryIntent = new Intent();
         categoryIntent.putExtra("subjectName", subjectName);

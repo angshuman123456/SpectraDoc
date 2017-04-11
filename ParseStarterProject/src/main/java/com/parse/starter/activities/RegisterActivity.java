@@ -8,7 +8,7 @@
  */
 
 
-package com.parse.starter;
+package com.parse.starter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +22,7 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.parse.starter.R;
 
 
 public class RegisterActivity extends AppCompatActivity {

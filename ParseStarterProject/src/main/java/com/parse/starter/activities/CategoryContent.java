@@ -1,10 +1,12 @@
-package com.parse.starter;
+package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.parse.starter.R;
 
 import java.util.ArrayList;
 

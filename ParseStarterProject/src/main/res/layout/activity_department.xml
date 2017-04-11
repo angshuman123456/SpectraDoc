@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/logoblur"
-    tools:context=".Department">
+    tools:context=".activities.Department">
 
     <ImageView
         android:contentDescription="@string/content_desc"

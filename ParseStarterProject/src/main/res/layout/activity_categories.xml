@@ -8,7 +8,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context=".Categories"
+    tools:context=".activities.Categories"
     android:background="@drawable/logoblur">
 
     <LinearLayout
@@ -22,7 +22,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:tag="@string/notice"
-        android:onClick="filesView">
+        android:onClick="moveToCategoryContentActivity">
         <ImageView
             android:contentDescription="@string/content_desc"
             android:id="@+id/notice_imageView"
@@ -53,7 +53,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:tag="@string/notes"
-        android:onClick="filesView">
+        android:onClick="moveToCategoryContentActivity">
 
         <ImageView
             android:id="@+id/notes_imageView"
@@ -85,7 +85,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:tag="@string/assignment"
-        android:onClick="filesView">
+        android:onClick="moveToCategoryContentActivity">
 
         <ImageView
             android:id="@+id/assignment_imageView"
@@ -117,7 +117,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:tag="@string/syllabus"
-        android:onClick="filesView">
+        android:onClick="moveToCategoryContentActivity">
         <ImageView
             android:contentDescription="@string/content_desc"
             android:id="@+id/syllabus_imageView"
@@ -151,7 +151,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:tag="@string/ebook"
-        android:onClick="filesView">
+        android:onClick="moveToCategoryContentActivity">
 
         <ImageView
             android:id="@+id/ebook_imageView"

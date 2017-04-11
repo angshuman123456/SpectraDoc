@@ -1,4 +1,4 @@
-package com.parse.starter;
+package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.starter.R;
 
 import java.util.ArrayList;
 import java.util.List;

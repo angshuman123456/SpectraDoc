@@ -1,15 +1,24 @@
-package com.parse.starter;
+package com.parse.starter.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.starter.R;
+import com.parse.starter.filesCompression.ImageCompression;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +34,8 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
     String selectedCategory, selectedSemester, selectedSubject;
 
+    TextView fileName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +49,9 @@ public class FacultyUploadActivity extends AppCompatActivity {
         spinner_subject=(Spinner)findViewById(R.id.spinner_subject);
         spinner_category = (Spinner) findViewById(R.id.spinner_category);
 
+
+        // inflate the fileName text view
+        fileName = (TextView) findViewById(R.id.file_name);
 
         // create an object of the list and enter the categories
         categories = new ArrayList<>(Arrays.asList("Assignment", "E-book",
@@ -115,6 +129,57 @@ public class FacultyUploadActivity extends AppCompatActivity {
     // this method is used to fetch the subject names from the db and store them in subjects list
     private void fetchSubjects() {
         // query the db and store the items in the list subjects
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permission, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permission, grantResults);
+        if(requestCode == 1) {
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getFile();
+            }
+        }
+    }
+
+
+    public void selectFile(View view) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            } else {
+                getFile();
+            }
+        } else {
+            getFile();
+        }
+    }
+
+    public void getFile() {
+        Intent fileFetchIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        fileFetchIntent.setType("file/*");
+        startActivityForResult(fileFetchIntent, 10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 10 && resultCode == RESULT_OK && data != null) {
+            final Uri file = data.getData();
+            File file1 = new File(file.toString());
+            fileName.setText(file1.getName());
+
+
+            // need to fetch the name of the file and it's type and compress it and upload it to the db
+
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    ImageCompression imageCompression = new ImageCompression();
+                    imageCompression.upload(FacultyUploadActivity.this, file);
+                }
+            };
+            new Thread(runnable).start();
+        }
     }
 
 }
