@@ -57,7 +57,6 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
         // store the subject in the subject list
         subjects = new ArrayList<>();
-        fetchSubjects();
 
         // uncomment the codes below to fill the spinner_subject with the data fetched
         // and make it function properly
@@ -83,6 +82,11 @@ public class FacultyUploadActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedString = parent.getItemAtPosition(position).toString();
                 Toast.makeText(FacultyUploadActivity.this, selectedString, Toast.LENGTH_SHORT).show();
+
+                if(generalSpinner.equals(spinner_semester)) {
+                    fetchSubjects();
+                }
+
                 FacultyUploadActivity.this.assignValues(generalSpinner, selectedString);
             }
 
