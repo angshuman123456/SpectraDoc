@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,11 +26,18 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.parse.starter.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText password, name, emailId, rollNumber, confirmPassword;
     Spinner department;
+
+    ArrayList<String> departmentNameList;
+
+    String departmentName = "";
 
 
     @Override
@@ -43,7 +52,30 @@ public class RegisterActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
+        departmentNameList = new ArrayList<>(Arrays.asList("","Computer Science", "Electrical", "Electronics", "Civil"));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,departmentNameList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        department.setAdapter(adapter);
+        setItemClick(department);
+
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
+    }
+
+
+    private void setItemClick(Spinner department) {
+        department.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                departmentName = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(RegisterActivity.this, "Please select a department", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void signUp(View view) {
@@ -73,9 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.setPassword(password.getText().toString());
             user.setEmail(emailId.getText().toString());
             user.put("RollNo_Id",Integer.parseInt(rollNumber.getText().toString()));
-
-            // select the dept name from the spinner and update it into the db..
-           // user.put("Dept_Name", department.getText().toString() );
+            user.put("Dept_Name", departmentName);
 
             user.signUpInBackground(new SignUpCallback() {
                 @Override
