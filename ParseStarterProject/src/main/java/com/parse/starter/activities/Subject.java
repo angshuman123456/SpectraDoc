@@ -19,6 +19,7 @@ public class Subject extends AppCompatActivity {
 
     ListView subjectList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class Subject extends AppCompatActivity {
 
 
         // code to display the subjects in the list view
+
         ArrayList<String> subjectName = semesterActivityIntent.getStringArrayListExtra("subjectArray");
 
         ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(this,
@@ -55,6 +57,11 @@ public class Subject extends AppCompatActivity {
         Intent categoryIntent = new Intent();
         categoryIntent.putExtra("subjectName", subjectName);
         startActivity(categoryIntent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

@@ -80,6 +80,7 @@ public class MemberLoginActivity extends AppCompatActivity {
                             if(e == null && objects.size() > 0) {
                                 for(ParseUser obj: objects) {
                                     departmentName = obj.getString("Dept_Name");
+                                    Log.i("Info", departmentName);
                                 }
                             }
                         }
@@ -97,7 +98,6 @@ public class MemberLoginActivity extends AppCompatActivity {
                         @Override
                         public void done(List<ParseUser> objects, ParseException e) {
                             if (e == null && objects.size() > 0) {
-                                Log.i("Info", "inside parse query");
                                 for (ParseUser obj : objects) {
                                     logInUser(obj.getString("username"));
                                 }

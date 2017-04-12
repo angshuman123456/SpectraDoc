@@ -15,6 +15,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.starter.R;
 import com.parse.starter.filesCompression.ImageCompression;
 
@@ -36,13 +40,15 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
     TextView fileName;
 
+    String department;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_upload);
 
         memberLoginIntent = getIntent();
-        memberLoginIntent.getStringExtra("department");
+        department = memberLoginIntent.getStringExtra("department");
 
         // inflate the spinners
         spinner_semester = (Spinner) findViewById(R.id.spinner_semester);
@@ -94,14 +100,13 @@ public class FacultyUploadActivity extends AppCompatActivity {
         generalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 String selectedString = parent.getItemAtPosition(position).toString();
                 Toast.makeText(FacultyUploadActivity.this, selectedString, Toast.LENGTH_SHORT).show();
-
-                if(generalSpinner.equals(spinner_semester)) {
+                FacultyUploadActivity.this.assignValues(generalSpinner, selectedString);
+                if(generalSpinner.getId() == spinner_semester.getId()) {
                     fetchSubjects();
                 }
-
-                FacultyUploadActivity.this.assignValues(generalSpinner, selectedString);
             }
 
             @Override
@@ -113,6 +118,9 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
     // this method is used to assign the selected values of the spinner into their respected string variables
     public void assignValues(Spinner generalSpinner, String generalString) {
+
+        Log.i("Info", "inside assignValues");
+
         String generalSpinnerTag = generalSpinner.getTag().toString();
         if(generalSpinnerTag.equalsIgnoreCase("Category")) {
             selectedCategory = generalString;
@@ -129,6 +137,33 @@ public class FacultyUploadActivity extends AppCompatActivity {
     // this method is used to fetch the subject names from the db and store them in subjects list
     private void fetchSubjects() {
         // query the db and store the items in the list subjects
+
+        Log.i("Info", "inside fetchSubjects");
+        Log.i("Info", selectedSemester);
+        Log.i("Info", department);
+
+        ParseQuery<ParseObject> subjectQuery = ParseQuery.getQuery("subject");
+        subjectQuery.whereEqualTo("Dept_Name", department);
+        subjectQuery.whereEqualTo("Semester", selectedSemester);
+
+        subjectQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                Log.i("Info", "inside parse query");
+
+                Log.i("Info", String.valueOf(objects.size()));
+
+                if(e == null && objects.size() > 0) {
+                    Log.i("Info", "inside if");
+
+                    for(ParseObject obj: objects) {
+                        subjects.add(obj.getString("Subject_Name"));
+                        Log.i("Info", obj.getString("Subject_Name"));
+                    }
+                    fillSpinners(spinner_subject, subjects);
+                }
+            }
+        });
     }
 
     @Override

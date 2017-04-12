@@ -38,36 +38,46 @@ public class SemesterActivity extends AppCompatActivity {
         fetchSubjectsName(semester, departmentName);
     }
 
-    private void fetchSubjectsName(final String semester, final String department) {
+    public void fetchSubjectsName(final String semester, final String department) {
+
+        if(nameOfSubjects.size() > 0) {
+            nameOfSubjects.clear();
+        }
 
 
         /* code to connect to db and fetch the subjects of the semester and fill the "nameOfSubjects"
         * with the name of the subjects fetched from the db
          */
 
-        ParseQuery<ParseObject> query1 = ParseQuery.getQuery("subject");
-        query1.whereEqualTo("Dept_Name", department);
-        query1.whereEqualTo("Semester", semester);
+        ParseQuery<ParseObject> subjectQuery = ParseQuery.getQuery("subject");
+        subjectQuery.whereEqualTo("Dept_Name", department);
+        subjectQuery.whereEqualTo("Semester", semester);
 
-        query1.findInBackground(new FindCallback<ParseObject>() {
+        subjectQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-
                 if(e == null && objects.size() > 0) {
 
                     for(ParseObject obj: objects) {
                         nameOfSubjects.add(obj.getString("Subject_Name"));
+                        Log.i("Info", "subject " + obj.getString("Subject_Name"));
                     }
+                    moveToSubjectActivity();
                 }
             }
         });
 
-        moveToSubjectActivity();
+
     }
 
     private void moveToSubjectActivity() {
         Intent subjectsActivityIntent = new Intent(this, Subject.class);
         subjectsActivityIntent.putStringArrayListExtra("subjectArray", nameOfSubjects);
         startActivity(subjectsActivityIntent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
