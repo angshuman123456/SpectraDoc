@@ -33,7 +33,7 @@ public class SemesterActivity extends AppCompatActivity {
 
     public void fetchSemesterNumber(View view) {
 
-        String semester = "semester-" + view.getTag().toString() ;
+        String semester = "Semester-" + view.getTag().toString() ;
         Log.i("Info", semester);
         fetchSubjectsName(semester, departmentName);
     }
