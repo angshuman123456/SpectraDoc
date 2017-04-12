@@ -2,7 +2,6 @@ package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,9 +19,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.starter.R;
-import com.parse.starter.filesCompression.ImageCompression;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,10 +74,6 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
         // store the subject in the subject list
         subjects = new ArrayList<>();
-
-        // uncomment the codes below to fill the spinner_subject with the data fetched
-        // and make it function properly
-        fillSpinners(spinner_subject, subjects);
         onItemClick(spinner_subject);
 
 
@@ -199,21 +192,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10 && resultCode == RESULT_OK && data != null) {
-            final Uri file = data.getData();
-            File file1 = new File(file.toString());
-            fileName.setText(file1.getName());
-
-
-            // need to fetch the name of the file and it's type and compress it and upload it to the db
-
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    ImageCompression imageCompression = new ImageCompression();
-                    imageCompression.upload(FacultyUploadActivity.this, file);
-                }
-            };
-            new Thread(runnable).start();
+           // write the code to fetch the file, extract the file name and it's type and create object respectively and upload
         }
     }
 
