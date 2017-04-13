@@ -2,8 +2,11 @@ package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,7 +22,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.starter.R;
+import com.parse.starter.filesCompression.ImageCompression;
+import com.parse.starter.filesCompression.PdfCompression;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +44,16 @@ public class FacultyUploadActivity extends AppCompatActivity {
     TextView fileName;
 
     String department;
+
+    String fetchedFileName = "";
+
+    Uri file;
+
+    ImageCompression imageCompression;
+    PdfCompression pdfCompression;
+
+    public static final int GET_FILE_REQUEST_CODE = 2;
+    public static final int GET_PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,10 +147,6 @@ public class FacultyUploadActivity extends AppCompatActivity {
     private void fetchSubjects() {
         // query the db and store the items in the list subjects
 
-        Log.i("Info", "inside fetchSubjects");
-        Log.i("Info", selectedSemester);
-        Log.i("Info", department);
-
         ParseQuery<ParseObject> subjectQuery = ParseQuery.getQuery("subject");
         subjectQuery.whereEqualTo("Dept_Name", department);
         subjectQuery.whereEqualTo("Semester", selectedSemester);
@@ -142,16 +154,11 @@ public class FacultyUploadActivity extends AppCompatActivity {
         subjectQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                Log.i("Info", "inside parse query");
-
-                Log.i("Info", String.valueOf(objects.size()));
 
                 if(e == null && objects.size() > 0) {
-                    Log.i("Info", "inside if");
 
                     for(ParseObject obj: objects) {
                         subjects.add(obj.getString("Subject_Name"));
-                        Log.i("Info", obj.getString("Subject_Name"));
                     }
                     fillSpinners(spinner_subject, subjects);
                 }
@@ -162,7 +169,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permission, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permission, grantResults);
-        if(requestCode == 1) {
+        if(requestCode == GET_PERMISSION_REQUEST_CODE) {
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getFile();
             }
@@ -173,7 +180,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
     public void selectFile(View view) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                requestPermissions(new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, GET_PERMISSION_REQUEST_CODE);
             } else {
                 getFile();
             }
@@ -183,17 +190,69 @@ public class FacultyUploadActivity extends AppCompatActivity {
     }
 
     public void getFile() {
+
+        // not working as the code is not able to get the absolute path of the file
         Intent fileFetchIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        fileFetchIntent.setType("file/*");
-        startActivityForResult(fileFetchIntent, 10);
+        fileFetchIntent.setType("*/*");
+        startActivityForResult(fileFetchIntent, GET_FILE_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10 && resultCode == RESULT_OK && data != null) {
-           // write the code to fetch the file, extract the file name and it's type and create object respectively and upload
+        if(requestCode == GET_FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+
+            // write the code to fetch the file, extract the file name and it's type and create object respectively and upload
+            file = data.getData();
+
+            // file path is printed
+            Log.i("Info", file.getPath());
+
+            File f = new File(file.getPath());
+
+            // file's absolute path is printed although it is printing the same absolute path as the path
+            Log.i("Info", f.getAbsolutePath());
+
+            Cursor returnCursor;
+            try {
+
+                // fetches the name of the file from the path using the cursor variable
+                returnCursor = getContentResolver().query(file, null, null, null, null);
+                assert returnCursor != null;
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                returnCursor.moveToFirst();
+                fetchedFileName = returnCursor.getString(nameIndex);
+
+                // prints the name of the file
+                Log.i("info", fetchedFileName);
+
+                returnCursor.close();
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            fileName.setText(fetchedFileName);
         }
+    }
+
+    public void uploadFile(View view) {
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                // code below works fine for the image compression but not for other files
+//                imageCompression = new ImageCompression(FacultyUploadActivity.this, file, fetchedFileName, selectedCategory,
+//                        department, selectedSemester);
+//
+//                imageCompression.upload();
+
+                pdfCompression = new PdfCompression(FacultyUploadActivity.this,
+                        file, fetchedFileName, selectedCategory, department, selectedSemester);
+                pdfCompression.upload();
+
+
+            }
+        };
+        new Thread(runnable).start();
     }
 
 }

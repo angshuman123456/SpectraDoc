@@ -64,6 +64,7 @@
         android:text="@string/upload"
         android:gravity="center"
         android:textSize="20sp"
-        android:background="@drawable/back_button" />
+        android:background="@drawable/back_button"
+        android:onClick="uploadFile"/>
 
 </LinearLayout>

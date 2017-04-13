@@ -1,12 +1,14 @@
 package com.parse.starter.filesCompression;
 
+import com.parse.ParseFile;
+
 /**
- * Astract class for common methods in compression classes
+ * Abstract class for common methods in compression classes
  */
 
 abstract class Compression {
 
     public abstract void upload();
-    public abstract  void download();
-    public abstract void fetchAndView();
+    public abstract void download();
+    public abstract ParseFile fetchAndView();
 }
