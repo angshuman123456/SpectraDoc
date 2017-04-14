@@ -25,7 +25,6 @@ import com.parse.starter.R;
 import com.parse.starter.filesCompression.ImageCompression;
 import com.parse.starter.filesCompression.PdfCompression;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +44,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
     String department;
 
-    String fetchedFileName = "";
+    String fetchedFileName = "", filePath;
 
     Uri file;
 
@@ -201,21 +200,14 @@ public class FacultyUploadActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GET_FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-
             // write the code to fetch the file, extract the file name and it's type and create object respectively and upload
             file = data.getData();
-
             // file path is printed
             Log.i("Info", file.getPath());
-
-            File f = new File(file.getPath());
-
+//            File f = new File(file.getPath());
             // file's absolute path is printed although it is printing the same absolute path as the path
-            Log.i("Info", f.getAbsolutePath());
-
+//            Log.i("Info", f.getAbsolutePath());
             Cursor returnCursor;
-            try {
-
                 // fetches the name of the file from the path using the cursor variable
                 returnCursor = getContentResolver().query(file, null, null, null, null);
                 assert returnCursor != null;
@@ -227,9 +219,6 @@ public class FacultyUploadActivity extends AppCompatActivity {
                 Log.i("info", fetchedFileName);
 
                 returnCursor.close();
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
             fileName.setText(fetchedFileName);
         }
     }
