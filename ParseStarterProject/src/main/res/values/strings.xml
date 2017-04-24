@@ -14,6 +14,10 @@
 
     <string name="hello_world"> Hello World! </string>
 
+    <string name="menu_title_about_us"> About us </string>
+    <string name="menu_title_about_college"> About College </string>
+    <string name="menu_title_logout"> Logout </string>
+
     <string name="loginAs"> Login As: </string>
     <string name="faculty"> Faculty </string>
     <string name="student"> Student </string>
@@ -68,10 +72,27 @@
     <string name="validationCodeButtonTextChanged"> VERIFY CODE </string>
 
     <string name="upload"> Upload File </string>
-    <string name="select"> Select File </string>
+    <string name="choose"> Choose File </string>
 
     <string name="category"> Category </string>
     <string name="subject"> Subject </string>
     <string name="semester"> Semester </string>
 
+    <string name="select_dept">Select Department</string>
+
+    <string name="sem_choose">Choose Semester:</string>
+    <string name="sub_choose">Choose Subject:</string>
+    <string name="category_choose">Choose Category:</string>
+    <string name="department_choose"> Choose your Department: </string>
+
+    <string name="about_clg">ABOUT COLLEGE</string>
+    <string name="address">Siliguri Institute of Technology\nS.I.T Campus, Salbari,\nPO. Sukna, Dist. Darjeeling,\nWest Bengal, PIN-734009.</string>
+    <string name="phone">0353&#8211;2778002 / 2778004\n0353&#8211;2778003(Fax)</string>
+    <string name="mail">registrar@sittechno.org\nadmission@sittechno.org</string>
+
+    <string name="about_us">DEVELOPERS</string>
+    <string name="richa">Richa Agarwal\nragarwal317@gmail.com\nDesignation-Database Developer</string>
+    <string name="angshu">Angshuman Halder\nangshuman.halder243@gmail.com\nDesignation-Developer</string>
+    <string name="ankita">Ankita Gupta\nankitagupta9505@gmail.com\nDesignation-UI/UX Designer</string>
+    <string name="binita">Binita Agarwal\nagarwalbinita1395@gmail.com\nDesignation-UI/UX Developer</string>
 </resources>

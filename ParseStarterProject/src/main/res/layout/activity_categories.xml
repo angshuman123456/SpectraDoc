@@ -1,175 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        tools:context=".activities.Categories"
+        android:background="@drawable/logoblur">
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    tools:context=".activities.Categories"
-    android:background="@drawable/logoblur">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:tag="@string/notice"
-        android:onClick="moveToCategoryContentActivity">
-        <ImageView
-            android:contentDescription="@string/content_desc"
-            android:id="@+id/notice_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/notice" />
-        <TextView
-            android:id="@+id/notice_textView"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:orientation="vertical"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:gravity="center"
-            android:text="@string/notice"
-            android:textStyle="bold"
-            android:textColor="#111111"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:tag="@string/notes"
-        android:onClick="moveToCategoryContentActivity">
-
-        <ImageView
-            android:id="@+id/notes_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/content_desc"
-            android:src="@drawable/notes" />
-
-        <TextView
-            android:id="@+id/notes_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:text="@string/notes"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#111111" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:tag="@string/assignment"
-        android:onClick="moveToCategoryContentActivity">
-
-        <ImageView
-            android:id="@+id/assignment_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/content_desc"
-            android:gravity="center"
-            android:src="@drawable/assignment" />
-
-        <TextView
-            android:id="@+id/assignment_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#111111"
-            android:gravity="center"
-            android:text="@string/assignment" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_row="2"
-        android:layout_column="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:tag="@string/syllabus"
-        android:onClick="moveToCategoryContentActivity">
-        <ImageView
-            android:contentDescription="@string/content_desc"
-            android:id="@+id/syllabus_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/syllabus" />
+            android:tag="@string/assignment"
+            android:onClick="moveToCategoryContentActivity">
 
-        <TextView
-            android:id="@+id/syllabus_textView"
+            <ImageView
+                android:id="@+id/assignment_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/content_desc"
+                android:gravity="center"
+                android:src="@drawable/assignment" />
+
+            <TextView
+                android:id="@+id/assignment_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#111111"
+                android:layout_below="@+id/assignment_imageView"
+                android:gravity="center"
+                android:text="@string/assignment" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:orientation="vertical"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/syllabus"
-            android:textColor="#111111"
-            android:padding="0dp"/>
+            android:layout_gravity="center"
+            android:tag="@string/ebook"
+            android:onClick="moveToCategoryContentActivity">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/ebook_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/content_desc"
+                android:src="@drawable/ebook" />
 
-    <LinearLayout
-        android:layout_width="106dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_row="0"
-        android:layout_column="2"
-        android:layout_columnWeight="1"
-        android:layout_rowWeight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:tag="@string/ebook"
-        android:onClick="moveToCategoryContentActivity">
+            <TextView
+                android:id="@+id/ebook_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ebook"
+                android:layout_below="@+id/ebook_imageView"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#111111" />
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ebook_imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/content_desc"
-            android:src="@drawable/ebook" />
-
-        <TextView
-            android:id="@+id/ebook_textView"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ebook"
+            android:orientation="vertical"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#111111" />
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:tag="@string/notes"
+            android:onClick="moveToCategoryContentActivity">
+
+            <ImageView
+                android:id="@+id/notes_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/content_desc"
+                android:src="@drawable/notes" />
+
+            <TextView
+                android:id="@+id/notes_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:text="@string/notes"
+                android:layout_below="@+id/notes_imageView"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#111111" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:tag="@string/notice"
+            android:onClick="moveToCategoryContentActivity">
+
+            <ImageView
+                android:contentDescription="@string/content_desc"
+                android:id="@+id/notice_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/notice" />
+
+            <TextView
+                android:id="@+id/notice_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_below="@+id/notice_imageView"
+                android:text="@string/notice"
+                android:textStyle="bold"
+                android:textColor="#111111"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:tag="@string/syllabus"
+            android:onClick="moveToCategoryContentActivity">
+
+            <ImageView
+                android:contentDescription="@string/content_desc"
+                android:id="@+id/syllabus_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/syllabus" />
+
+            <TextView
+                android:id="@+id/syllabus_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/syllabus_imageView"
+                android:text="@string/syllabus"
+                android:textColor="#111111" />
+
+        </RelativeLayout>
 
 
-</GridLayout>
+    </GridLayout>

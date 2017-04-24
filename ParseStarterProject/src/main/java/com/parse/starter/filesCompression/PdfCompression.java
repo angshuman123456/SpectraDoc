@@ -7,11 +7,12 @@ import android.util.Log;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ProgressCallback;
 import com.parse.SaveCallback;
 
-import java.io.ByteArrayOutputStream;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
-import java.io.FileInputStream;
 
 /**
  * Compress the file to pdf format and vice versa for uploading, downloading and viewing from the db
@@ -43,41 +44,36 @@ public class PdfCompression extends Compression {
 
             // convert the uri to file using an external third party jar file named commons-io-2.5.jar
             // check the gradle file to check for the dependency of commons-io-2.5.jar
-//            File pdfFile = new File(selectedPDFFile.getPath(), fileName);
 
+            // fetches the file path
+            String filePath = FileChooser.getPath(context, selectedPDFFile);
 
-            File pdfFile = new File(FileChooser.getPath(context, selectedPDFFile));
+            // assertion that file path won't be null
+            assert filePath != null;
+
+            // creates a file object from the file located at filePath
+            File pdfFile = new File(filePath);
+
             // stores the file directly to byte array
-//            byte[] fileByteArray = FileUtils.readFileToByteArray(pdfFile);
-
-            /**
-            * The code below performs the same functionality as that of the above code but without using third party jar
-             * not sure if any of the code is correct
-             * as it cannot be tested without getting the file from the sd card or internal storage and converting it into a file object
-             **/
-
-            // create a file input stream object to read the data from the input stream
-            FileInputStream fileInputStream = new FileInputStream(pdfFile);
-
-            // create a byte array output stream object
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-            // reads the content form the file input stream object and store it in the output stream object
-            byte[] buf = new byte[1024];
-            try {
-                for(int readNum; (readNum = fileInputStream.read(buf)) != -1; ) {
-                    stream.write(buf, 0 , readNum);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            // convert the output stream object to byte array
-            byte[] fileByteArray = stream.toByteArray();
-//            Log.i("Info", String.valueOf(fileByteArray.length));
+            byte[] fileByteArray = FileUtils.readFileToByteArray(pdfFile);
 
             // creates a parse file object from the array and names it
             ParseFile parseFile = new ParseFile(fileName, fileByteArray);
+            parseFile.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.i("Info", "Successful");
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            }, new ProgressCallback() {
+                @Override
+                public void done(Integer percentDone) {
+                    Log.i("Percentage", String.valueOf(percentDone));
+                }
+            });
 
             // write the database query to upload the file to database table
             ParseObject file = new ParseObject("file");
@@ -104,7 +100,7 @@ public class PdfCompression extends Compression {
     }
 
     @Override
-    public void download() {
+    public void download(String fileName) {
 
     }
 

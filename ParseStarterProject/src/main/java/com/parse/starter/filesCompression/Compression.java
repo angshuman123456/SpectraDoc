@@ -9,6 +9,6 @@ import com.parse.ParseFile;
 abstract class Compression {
 
     public abstract void upload();
-    public abstract void download();
+    public abstract void download(String fileName);
     public abstract ParseFile fetchAndView();
 }

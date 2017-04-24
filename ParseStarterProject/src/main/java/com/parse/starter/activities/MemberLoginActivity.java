@@ -26,6 +26,7 @@ public class MemberLoginActivity extends AppCompatActivity {
     Switch studentFacultySwitch;
     EditText loginUserId, loginPassword;
     String departmentName = "";
+    static String studentUsername = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,44 +67,46 @@ public class MemberLoginActivity extends AppCompatActivity {
                 if(loginPassword.getText().toString().isEmpty() ||
                         loginUserId.getText().toString().isEmpty()) {
 
-                    Toast.makeText(MemberLoginActivity.this, "Username or password field cannot be empty", Toast.LENGTH_SHORT).show();
-                }
-
-                if(studentFacultySwitch.isChecked()) {
-
-                    // write the code for faculty login and move to faculty uploading activity
-                    ParseQuery<ParseUser> faculty_query = ParseUser.getQuery();
-                    faculty_query.whereEqualTo("username", loginUserId.getText().toString());
-                    faculty_query.findInBackground(new FindCallback<ParseUser>() {
-                        @Override
-                        public void done(List<ParseUser> objects, ParseException e) {
-                            if(e == null && objects.size() > 0) {
-                                for(ParseUser obj: objects) {
-                                    departmentName = obj.getString("Dept_Name");
-                                    Log.i("Info", departmentName);
-                                }
-                            }
-                        }
-                    });
-                    logInUser(loginUserId.getText().toString());
-
+                    Toast.makeText(MemberLoginActivity.this, "Username/Password field cannot be empty", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    // write the code for student login move to department activity
+                    if (studentFacultySwitch.isChecked()) {
 
-                    ParseQuery<ParseUser> student_query = ParseUser.getQuery();
-                    student_query.whereEqualTo("RollNo_Id",
-                            Integer.parseInt(loginUserId.getText().toString())).setLimit(1);
-                    student_query.findInBackground(new FindCallback<ParseUser>() {
-                        @Override
-                        public void done(List<ParseUser> objects, ParseException e) {
-                            if (e == null && objects.size() > 0) {
-                                for (ParseUser obj : objects) {
-                                    logInUser(obj.getString("username"));
+                        // write the code for faculty login and move to faculty uploading activity
+                        ParseQuery<ParseUser> faculty_query = ParseUser.getQuery();
+                        faculty_query.whereEqualTo("username", loginUserId.getText().toString());
+                        faculty_query.findInBackground(new FindCallback<ParseUser>() {
+                            @Override
+                            public void done(List<ParseUser> objects, ParseException e) {
+                                if (e == null && objects.size() > 0) {
+                                    for (ParseUser obj : objects) {
+                                        departmentName = obj.getString("Dept_Name");
+                                        Log.i("Info", departmentName);
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                        logInUser(loginUserId.getText().toString());
+
+                    } else {
+
+                        // write the code for student login move to department activity
+                        ParseQuery<ParseUser> student_query = ParseUser.getQuery();
+                        student_query.whereEqualTo("RollNo_Id",
+                                Integer.parseInt(loginUserId.getText().toString())).setLimit(1);
+                        student_query.findInBackground(new FindCallback<ParseUser>() {
+                            @Override
+                            public void done(List<ParseUser> objects, ParseException e) {
+                                if (e == null && objects.size() > 0) {
+                                    MemberLoginActivity.studentUsername = objects.get(0).getString("username");
+                                    Log.i("Username for student", MemberLoginActivity.studentUsername);
+                                    logInUser(studentUsername);
+                                } else {
+                                    Toast.makeText(MemberLoginActivity.this, "Invalid Username/Password", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
                 }
 
                 // to check if the button is clicked or functioning properly
@@ -113,15 +116,21 @@ public class MemberLoginActivity extends AppCompatActivity {
 
     private void logInUser(String userName) {
 
+        Log.i("Info", userName);
+
         ParseUser.logInInBackground(userName, loginPassword.getText().toString(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
+                Log.d("Debug", "inside done method");
                 if(user != null) {
+                    Log.d("Debug", "inside if");
                     if(studentFacultySwitch.isChecked()) {
                         moveToFacultyActivity();
                     } else {
                          moveToDepartmentActivity();
                     }
+                } else {
+                    Toast.makeText(MemberLoginActivity.this, "Invalid Username/Password", Toast.LENGTH_SHORT).show();
                 }
             }
         });

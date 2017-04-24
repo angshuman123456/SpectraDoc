@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.emailsAndPasswordRecovery.PasswordRecovery;
 
-import java.util.Random;
+import java.util.List;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -20,6 +25,7 @@ public class ForgotPassword extends AppCompatActivity {
     Button validationCodeButton;
 
     private static boolean verifyCodeActive = false;
+    long code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +42,25 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     // this function will be called when send code button is clicked
+    // to check valid email address or empty email
+
     public void sendCode(View view) {
-
         if(emailId.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Email Id field cannot be empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email field cannot be empty", Toast.LENGTH_SHORT).show();
         } else {
-            codeVerificationChecker();
+            ParseQuery<ParseUser> emailQuery = ParseUser.getQuery();
+            emailQuery.whereEqualTo("email", emailId.getText().toString());
+            emailQuery.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> objects, ParseException e) {
+                    if(e == null && objects.size() > 0) {
+                        codeVerificationChecker();
+                    } else {
+                        Toast.makeText(ForgotPassword.this, "Invalid email Id", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
-
-        // checks if the button is clicked
-        Log.i("Info", "Send Code clicked");
     }
 
     private void codeVerificationChecker() {
@@ -54,13 +69,17 @@ public class ForgotPassword extends AppCompatActivity {
 
             generatedCode.setVisibility(View.VISIBLE);
 
-            Random randomCodeGenerator;
-            randomCodeGenerator = new Random();
+//            Random randomCodeGenerator;
+//            randomCodeGenerator = new Random();
+//
+//            long code = randomCodeGenerator.nextInt(9000) + 1000;
 
-            long code = randomCodeGenerator.nextInt(9000) + 1000;
+            PasswordRecovery recovery = new PasswordRecovery(this, emailId.getText().toString());
+            recovery.sendVerificationCode();
+            code = recovery.getCode();
+
             validationCodeButton.setText(R.string.validationCodeButtonTextChanged);
 
-            // update the code to the database
 
             // email code is yet to be written
 
@@ -71,9 +90,12 @@ public class ForgotPassword extends AppCompatActivity {
         } else {
 
 
-            // write the code to verify the code from the database and then move to the reset password screen
-
-            Log.i("Info", "Verify Code");
+            // write the code to verify the code and then move to the reset password screen
+            if(generatedCode.getText().toString().equals(String.valueOf(code))) {
+                // move to reset password activity
+            } else {
+                Toast.makeText(this, "Code does not match", Toast.LENGTH_SHORT).show();
+            }
 
             verifyCodeActive = false;
         }

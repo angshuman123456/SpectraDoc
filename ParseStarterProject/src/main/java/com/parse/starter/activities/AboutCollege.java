@@ -5,12 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.parse.starter.R;
 
-public class FilesViewer extends AppCompatActivity {
-
-
+public class AboutCollege extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_file_view);
+        setContentView(R.layout.activity_about_college);
     }
 }

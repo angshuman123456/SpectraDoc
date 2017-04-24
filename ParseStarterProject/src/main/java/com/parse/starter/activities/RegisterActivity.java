@@ -52,7 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
-        departmentNameList = new ArrayList<>(Arrays.asList("","Computer Science", "Electrical", "Electronics", "Civil"));
+        departmentNameList = new ArrayList<>(Arrays.asList( "Civil Engineering", "Computer Science & Engineering",
+                "Electrical Engineering", "Electronics & Communication Engineering", "Information Technology"));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,departmentNameList);

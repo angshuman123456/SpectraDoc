@@ -9,6 +9,8 @@ import android.util.Log;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ProgressCallback;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
@@ -54,6 +56,21 @@ public class ImageCompression extends Compression {
 
             // creates a parse file object from the byte array and names it
             ParseFile parseFile = new ParseFile(fileName, byteArray);
+            parseFile.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.i("Info", "Successful");
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            }, new ProgressCallback() {
+                @Override
+                public void done(Integer percentDone) {
+                    Log.i("Info", String.valueOf(percentDone));
+                }
+            });
 
             // write the database query to upload the file to database table file
             ParseObject images = new ParseObject("file");
@@ -78,9 +95,10 @@ public class ImageCompression extends Compression {
         }
     }
 
-    public void download() {
+    public void download(String fileName) {
 
         // write the database query to download the file to from the database
+        ParseQuery<ParseObject> fileDownloadQuery = new ParseQuery<>("file");
 
     }
 

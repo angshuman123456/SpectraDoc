@@ -2,14 +2,15 @@ package com.parse.starter.activities;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,9 +22,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.filesCompression.FileChooser;
 import com.parse.starter.filesCompression.ImageCompression;
 import com.parse.starter.filesCompression.PdfCompression;
+
+import org.apache.commons.io.FilenameUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +49,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
     String department;
 
-    String fetchedFileName = "", filePath;
+    String fetchedFileName = "";
 
     Uri file;
 
@@ -189,8 +194,6 @@ public class FacultyUploadActivity extends AppCompatActivity {
     }
 
     public void getFile() {
-
-        // not working as the code is not able to get the absolute path of the file
         Intent fileFetchIntent = new Intent(Intent.ACTION_GET_CONTENT);
         fileFetchIntent.setType("*/*");
         startActivityForResult(fileFetchIntent, GET_FILE_REQUEST_CODE);
@@ -200,25 +203,10 @@ public class FacultyUploadActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GET_FILE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            // write the code to fetch the file, extract the file name and it's type and create object respectively and upload
+
+            // code to fetch the file, extract the file name and it's type and create object respectively and upload
             file = data.getData();
-            // file path is printed
-            Log.i("Info", file.getPath());
-//            File f = new File(file.getPath());
-            // file's absolute path is printed although it is printing the same absolute path as the path
-//            Log.i("Info", f.getAbsolutePath());
-            Cursor returnCursor;
-                // fetches the name of the file from the path using the cursor variable
-                returnCursor = getContentResolver().query(file, null, null, null, null);
-                assert returnCursor != null;
-                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-                returnCursor.moveToFirst();
-                fetchedFileName = returnCursor.getString(nameIndex);
-
-                // prints the name of the file
-                Log.i("info", fetchedFileName);
-
-                returnCursor.close();
+            fetchedFileName = FilenameUtils.getName(FileChooser.getPath(getApplicationContext(), file));
             fileName.setText(fetchedFileName);
         }
     }
@@ -228,20 +216,59 @@ public class FacultyUploadActivity extends AppCompatActivity {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                // code below works fine for the image compression but not for other files
-//                imageCompression = new ImageCompression(FacultyUploadActivity.this, file, fetchedFileName, selectedCategory,
-//                        department, selectedSemester);
-//
-//                imageCompression.upload();
 
-                pdfCompression = new PdfCompression(FacultyUploadActivity.this,
-                        file, fetchedFileName, selectedCategory, department, selectedSemester);
-                pdfCompression.upload();
+                if(checkFileType()) {
+                imageCompression = new ImageCompression(FacultyUploadActivity.this, file, fetchedFileName, selectedCategory,
+                        department, selectedSemester);
 
+                imageCompression.upload();
+                } else {
+
+                    pdfCompression = new PdfCompression(FacultyUploadActivity.this,
+                            file, fetchedFileName, selectedCategory, department, selectedSemester);
+                    pdfCompression.upload();
+                }
 
             }
         };
         new Thread(runnable).start();
+    }
+
+    private boolean checkFileType() {
+        final String[] okFileExtensions = new String[] {"jpg", "png", "gif", "jpeg"};
+        String fileType = FilenameUtils.getExtension(fetchedFileName);
+        for(String extension: okFileExtensions) {
+            if (fileType.toLowerCase().endsWith(extension)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.about_us) {
+            // move to about us activity
+            Intent i = new Intent(getApplicationContext(), AboutUs.class);
+            startActivity(i);
+        } else if(item.getItemId() == R.id.about_college) {
+            // move to about college activity
+            Intent i = new Intent(getApplicationContext(), AboutCollege.class);
+            startActivity(i);
+        } else if(item.getItemId() == R.id.logout) {
+            ParseUser.logOut();
+            Intent i = new Intent(getApplicationContext(), MemberLoginActivity.class);
+            startActivity(i);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

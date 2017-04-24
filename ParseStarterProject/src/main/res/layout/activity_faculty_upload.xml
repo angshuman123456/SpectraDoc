@@ -11,60 +11,162 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".activities.FacultyUploadActivity">
 
-    <Spinner
-        android:id="@+id/spinner_semester"
+
+    <TextView
+        android:id="@+id/dept_choose"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:tag="@string/semester">
+        android:text="@string/sem_choose"
+        android:textColor="#111111"
+        android:textSize="18sp" />
 
-    </Spinner>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".28"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back_spinner"
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/spinner_subject"
+        <Spinner
+            android:id="@+id/spinner_semester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:tag="@string/semester"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/drop" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/subject_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sub_choose"
+        android:layout_marginTop="40dp"
+        android:textColor="#111111"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".28"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back_spinner"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_subject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:tag="@string/subject"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/drop" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/category_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/category_choose"
+        android:layout_marginTop="40dp"
+        android:textColor="#111111"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight=".28"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/back_spinner"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:tag="@string/category"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/drop" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:tag="@string/subject">
-    </Spinner>
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:tag="@string/category">
-    </Spinner>
+        android:orientation="horizontal">
 
     <TextView
         android:id="@+id/file_name"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/back_trans" />
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/back_spinner" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/select_file"
-        android:layout_marginTop="40dp"
-        android:textColor="#ffffff"
-        android:text="@string/select"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:background="@drawable/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose"
+        android:layout_alignTop="@+id/file_name"
+        android:layout_alignBottom="@+id/file_name"
+        android:layout_alignRight="@+id/file_name"
         android:onClick="selectFile"/>
+    </RelativeLayout>
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"    >
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/upload"
         android:layout_marginTop="40dp"
-        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
         android:text="@string/upload"
         android:gravity="center"
         android:textSize="20sp"
+        android:textColor="#ffffff"
         android:background="@drawable/back_button"
         android:onClick="uploadFile"/>
+</RelativeLayout>
+
 
 </LinearLayout>
