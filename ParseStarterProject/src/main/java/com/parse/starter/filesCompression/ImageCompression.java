@@ -2,10 +2,14 @@ package com.parse.starter.filesCompression;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.parse.FindCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -14,6 +18,9 @@ import com.parse.ProgressCallback;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * Compresses the file to image format and vice versa for uploading, viewing and downloading from the db
@@ -27,15 +34,22 @@ public class ImageCompression extends Compression {
     private String category;
     private String department;
     private String semester;
+    private String subject;
+    private Bitmap img;
 
     public ImageCompression(Context context, Uri selectedImage, String fileName, String category,
-                            String department, String semester) {
+                            String department, String semester, String subject) {
         this.context = context;
         this.selectedImage = selectedImage;
         this.fileName = fileName;
         this.department = department;
         this.category = category;
         this.semester = semester;
+        this.subject = subject;
+    }
+
+    public ImageCompression() {
+
     }
 
     public void upload() {
@@ -68,7 +82,6 @@ public class ImageCompression extends Compression {
             }, new ProgressCallback() {
                 @Override
                 public void done(Integer percentDone) {
-                    Log.i("Info", String.valueOf(percentDone));
                 }
             });
 
@@ -78,7 +91,7 @@ public class ImageCompression extends Compression {
             images.put("Category", category);
             images.put("Dept_Name", department);
             images.put("Semester", semester);
-
+            images.put("subject_Name", subject);
             images.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
@@ -95,17 +108,57 @@ public class ImageCompression extends Compression {
         }
     }
 
-    public void download(String fileName) {
+    public void download(final String fileNameDownload) {
+
 
         // write the database query to download the file to from the database
         ParseQuery<ParseObject> fileDownloadQuery = new ParseQuery<>("file");
+        fileDownloadQuery.whereEqualTo("File_Name", fileNameDownload);
+        fileDownloadQuery.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if(e == null && objects.size() > 0) {
+                    for(ParseObject object: objects) {
+                        ParseFile file =  object.getParseFile("File_Name");
+                        Log.i("Info", file.getName());
+                        file.getDataInBackground(new GetDataCallback() {
+                            @Override
+                            public void done(byte[] data, ParseException e) {
+                                if (e == null && data.length > 0) {
+                                    Log.i("Info", "we got the data ");
+                                     img = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+                                }
+                            }
+                        }, new ProgressCallback() {
+                            @Override
+                            public void done(Integer percentDone) {
+                            }
+                        });
+                        saveImage(img, fileNameDownload);
+                    }
+                }
+            }
+
+        });
 
     }
 
-    public ParseFile fetchAndView() {
-
-        // write the database query to fetch the file from the database and return it to the calling class
-
-        return null;
+    private void saveImage(Bitmap finalBitmap, String fileNameDownload) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        Log.i("Root path", root);
+        File myDir = new File(root + "/download");
+        myDir.mkdir();
+        File file = new File(myDir, fileNameDownload);
+        if(file.exists())
+            file.delete();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

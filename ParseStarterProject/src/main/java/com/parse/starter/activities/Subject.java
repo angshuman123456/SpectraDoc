@@ -22,6 +22,8 @@ public class Subject extends AppCompatActivity {
     Intent semesterActivityIntent;
 
     ListView subjectList;
+    String departmentName;
+    String semester;
 
 
     @Override
@@ -34,8 +36,8 @@ public class Subject extends AppCompatActivity {
         // inflated the subjectList
         subjectList = (ListView) findViewById(R.id.subjectList);
 
-        // write the code to fetch the subject and store the length of the data fetched from the db and store it in the length variable
-
+        departmentName = semesterActivityIntent.getStringExtra("department");
+        semester = semesterActivityIntent.getStringExtra("semester");
 
         // code to display the subjects in the list view
 
@@ -60,6 +62,8 @@ public class Subject extends AppCompatActivity {
 
         Intent categoryIntent = new Intent(getApplicationContext(), Categories.class);
         categoryIntent.putExtra("subjectName", subjectName);
+        categoryIntent.putExtra("department", departmentName);
+        categoryIntent.putExtra("semester", semester);
         startActivity(categoryIntent);
     }
 

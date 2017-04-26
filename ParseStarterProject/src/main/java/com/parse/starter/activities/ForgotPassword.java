@@ -69,19 +69,11 @@ public class ForgotPassword extends AppCompatActivity {
 
             generatedCode.setVisibility(View.VISIBLE);
 
-//            Random randomCodeGenerator;
-//            randomCodeGenerator = new Random();
-//
-//            long code = randomCodeGenerator.nextInt(9000) + 1000;
-
             PasswordRecovery recovery = new PasswordRecovery(this, emailId.getText().toString());
             recovery.sendVerificationCode();
             code = recovery.getCode();
 
             validationCodeButton.setText(R.string.validationCodeButtonTextChanged);
-
-
-            // email code is yet to be written
 
             Log.i("Info", "Send Code");
 
@@ -92,7 +84,9 @@ public class ForgotPassword extends AppCompatActivity {
 
             // write the code to verify the code and then move to the reset password screen
             if(generatedCode.getText().toString().equals(String.valueOf(code))) {
-                // move to reset password activity
+                Intent i = new Intent(this, PasswordChangeActivity.class);
+                i.putExtra("emailId", emailId.getText().toString());
+                startActivity(i);
             } else {
                 Toast.makeText(this, "Code does not match", Toast.LENGTH_SHORT).show();
             }

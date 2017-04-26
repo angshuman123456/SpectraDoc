@@ -217,9 +217,9 @@ public class FacultyUploadActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if(checkFileType()) {
+                if(checkFileTypeImage()) {
                 imageCompression = new ImageCompression(FacultyUploadActivity.this, file, fetchedFileName, selectedCategory,
-                        department, selectedSemester);
+                        department, selectedSemester, selectedSubject);
 
                 imageCompression.upload();
                 } else {
@@ -234,7 +234,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
         new Thread(runnable).start();
     }
 
-    private boolean checkFileType() {
+    private boolean checkFileTypeImage() {
         final String[] okFileExtensions = new String[] {"jpg", "png", "gif", "jpeg"};
         String fileType = FilenameUtils.getExtension(fetchedFileName);
         for(String extension: okFileExtensions) {

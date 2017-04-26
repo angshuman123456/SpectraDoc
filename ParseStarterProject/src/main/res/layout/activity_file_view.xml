@@ -7,7 +7,7 @@
     android:weightSum="1"
     android:gravity="center"
     android:background="@drawable/logoblur"
-    android:text="@string/test"
+    android:id="@+id/imageL"
     tools:context=".activities.FilesViewer">
 
 </LinearLayout>

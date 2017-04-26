@@ -10,14 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.parse.ParseUser;
 import com.parse.starter.R;
+import com.parse.starter.filesCompression.ImageCompression;
+import com.parse.starter.filesCompression.PdfCompression;
+
+import org.apache.commons.io.FilenameUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CategoryContent extends AppCompatActivity {
 
@@ -26,14 +30,22 @@ public class CategoryContent extends AppCompatActivity {
 
     ListView categoryContent;
     SearchView searchFile;
+    ImageView imageView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_content);
+        imageView = (ImageView) findViewById(R.id.img);
 
         categoriesIntent = getIntent();
-        // fileNamesList = categoriesIntent.getStringArrayListExtra("fileNamesList");
-        fileNamesList = new ArrayList<>(Arrays.asList("file1", "file2", "file3"));
+
+
+        fileNamesList = categoriesIntent.getStringArrayListExtra("fileNamesList");
+
+        for(String name: fileNamesList) {
+            Log.i("Subject name", name);
+        }
+
 
         categoryContent = (ListView) findViewById(R.id.categoryContent);
         searchFile = (SearchView) findViewById(R.id.searchFile);
@@ -46,7 +58,15 @@ public class CategoryContent extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = categoryContentAdapter.getItem(position);
-                Log.d("Filename", name);
+                if(checkFileTypeImage(name)) {
+                    ImageCompression img = new ImageCompression();
+                    img.download(name);
+
+                } else {
+                    PdfCompression pdf = new PdfCompression();
+                    pdf.download(name);
+                }
+
             }
         });
 
@@ -65,7 +85,7 @@ public class CategoryContent extends AppCompatActivity {
 
     }
 
-    @Override
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
@@ -90,5 +110,16 @@ public class CategoryContent extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkFileTypeImage(String fetchedFileName) {
+        final String[] okFileExtensions = new String[] {"jpg", "png", "gif", "jpeg"};
+        String fileType = FilenameUtils.getExtension(fetchedFileName);
+        for(String extension: okFileExtensions) {
+            if (fileType.toLowerCase().endsWith(extension)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

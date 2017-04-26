@@ -46,7 +46,7 @@
 
             </activity>
         <activity android:name=".activities.Subject"/>
-        <activity android:name=".activities.FilesViewer"/>
+        <activity android:name=".activities.PasswordChangeActivity"/>
         <activity android:name=".activities.FacultyUploadActivity">
             
             </activity>

@@ -24,6 +24,7 @@ public class SemesterActivity extends AppCompatActivity {
     Intent getDataFromDeptActivityIntent;
     String departmentName;
     final ArrayList<String> nameOfSubjects = new ArrayList<>();
+    String semester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class SemesterActivity extends AppCompatActivity {
 
     public void fetchSemesterNumber(View view) {
 
-        String semester = "Semester-" + view.getTag().toString() ;
+        semester = "Semester-" + view.getTag().toString() ;
         Log.i("Info", semester);
         fetchSubjectsName(semester, departmentName);
     }
@@ -77,6 +78,8 @@ public class SemesterActivity extends AppCompatActivity {
     private void moveToSubjectActivity() {
         Intent subjectsActivityIntent = new Intent(this, Subject.class);
         subjectsActivityIntent.putStringArrayListExtra("subjectArray", nameOfSubjects);
+        subjectsActivityIntent.putExtra("department", departmentName);
+        subjectsActivityIntent.putExtra("semester", semester);
         startActivity(subjectsActivityIntent);
     }
 
