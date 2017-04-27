@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-import com.parse.GetCallback;
+import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -18,6 +18,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * Compress the file to pdf format and vice versa for uploading, downloading and viewing from the db
@@ -31,6 +32,7 @@ public class PdfCompression extends Compression {
     private String department;
     private  String category;
     private String semester;
+    private byte[] fileData;
 
     public PdfCompression(Context context, Uri selectedPDFFile, String fileName, String department,
                           String category, String semester) {
@@ -109,40 +111,45 @@ public class PdfCompression extends Compression {
     }
 
     @Override
-    public void download(String fileName) {
+    public void download(final String fileNameDownload) {
 
         // write the database query to download the file to from the database
         ParseQuery<ParseObject> fileDownloadQuery = new ParseQuery<>("file");
-        fileDownloadQuery.getFirstInBackground(new GetCallback<ParseObject>() {
+        fileDownloadQuery.whereEqualTo("File_Name", fileNameDownload);
+        fileDownloadQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(ParseObject object, ParseException e) {
-                if(object != null) {
-                    ParseFile file = (ParseFile) object.get("File_Name");
-                    file.getDataInBackground(new GetDataCallback() {
-                        @Override
-                        public void done(byte[] data, ParseException e) {
-                            if (e == null && data.length > 0) {
-                                Log.i("Info", "we got the data");
-                                saveFile(data);
+            public void done(List<ParseObject> objects, ParseException e) {
+                if(e == null && objects.size() > 0) {
+                    for(ParseObject object: objects) {
+                        ParseFile file =  object.getParseFile("File_Name");
+                        Log.i("Info", file.getName());
+                        file.getDataInBackground(new GetDataCallback() {
+                            @Override
+                            public void done(byte[] data, ParseException e) {
+                                if (e == null && data.length > 0) {
+                                    Log.i("Info", "we got the data ");
+                                    fileData = data;
+                                }
                             }
-                        }
-                    }, new ProgressCallback() {
-                        @Override
-                        public void done(Integer percentDone) {
-                        }
-                    });
+                        }, new ProgressCallback() {
+                            @Override
+                            public void done(Integer percentDone) {
+                            }
+                        });
+                        saveFile(fileData, fileNameDownload);
+                    }
                 }
             }
-        });
 
+        });
 
     }
 
-    private void saveFile(byte[] data) {
+    private void saveFile(byte[] data, String fileNameDownload) {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/download");
         myDir.mkdir();
-        File file = new File(myDir, fileName);
+        File file = new File(myDir, fileNameDownload);
         if(file.exists())
             file.delete();
         try {

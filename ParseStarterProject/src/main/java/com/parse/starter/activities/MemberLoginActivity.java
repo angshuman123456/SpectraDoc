@@ -136,6 +136,9 @@ public class MemberLoginActivity extends AppCompatActivity {
         });
     }
 
+    /** This is the method to implement forgot password but since it is not working because according to parse
+     * documentation password can only be changed if the user is currently logged in or from the cloud code.
+     *
     public void forgotPassword(View view) {
 
         // this function is called whenever "Forgot password" text view is called
@@ -143,6 +146,8 @@ public class MemberLoginActivity extends AppCompatActivity {
         Intent forgotPasswordIntent = new Intent(getApplicationContext(), ForgotPassword.class);
         startActivity(forgotPasswordIntent);
     }
+     *
+     * */
 
     public void registerActivity(View view) {
 

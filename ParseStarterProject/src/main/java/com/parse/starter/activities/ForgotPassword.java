@@ -18,6 +18,10 @@ import com.parse.starter.emailsAndPasswordRecovery.PasswordRecovery;
 
 import java.util.List;
 
+/**
+* currently inactive as changing password is not possible
+ */
+
 public class ForgotPassword extends AppCompatActivity {
 
     Intent memberLoginIntent;
@@ -84,14 +88,17 @@ public class ForgotPassword extends AppCompatActivity {
 
             // write the code to verify the code and then move to the reset password screen
             if(generatedCode.getText().toString().equals(String.valueOf(code))) {
-                Intent i = new Intent(this, PasswordChangeActivity.class);
+
+                Intent i = new Intent(ForgotPassword.this, PasswordChangeActivity.class);
                 i.putExtra("emailId", emailId.getText().toString());
                 startActivity(i);
+
             } else {
                 Toast.makeText(this, "Code does not match", Toast.LENGTH_SHORT).show();
+                generatedCode.setVisibility(View.VISIBLE);
+                validationCodeButton.setText(R.string.sendCodeButtonTextChanged);
+                verifyCodeActive = false;
             }
-
-            verifyCodeActive = false;
         }
     }
 }

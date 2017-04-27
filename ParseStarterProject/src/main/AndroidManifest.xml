@@ -24,32 +24,22 @@
 
         <activity android:name=".activities.Index">
             <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             </activity>
-        <activity android:name=".activities.MemberLoginActivity">
-
-        </activity>
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.ForgotPassword" />
-        <activity android:name=".activities.SemesterActivity" />
-        <activity android:name=".activities.Department" >
-
-            </activity>
-        <activity android:name=".activities.Categories">
-
-            </activity>
-
-        <activity android:name=".activities.CategoryContent">
-
-            </activity>
+        <activity android:name=".activities.MemberLoginActivity"/>
+        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.ForgotPassword"/>
+        <activity android:name=".activities.SemesterActivity"/>
+        <activity android:name=".activities.Department"/>
+        <activity android:name=".activities.Categories"/>
+        <activity android:name=".activities.CategoryContent"/>
         <activity android:name=".activities.Subject"/>
         <activity android:name=".activities.PasswordChangeActivity"/>
-        <activity android:name=".activities.FacultyUploadActivity">
-            
-            </activity>
+        <activity android:name=".activities.FacultyUploadActivity"/>
         <activity android:name=".activities.AboutUs"/>
         <activity android:name=".activities.AboutCollege"/>
     </application>
