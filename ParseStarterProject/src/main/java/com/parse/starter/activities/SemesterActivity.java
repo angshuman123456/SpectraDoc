@@ -3,7 +3,6 @@ package com.parse.starter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +38,7 @@ public class SemesterActivity extends AppCompatActivity {
     public void fetchSemesterNumber(View view) {
 
         semester = "Semester-" + view.getTag().toString() ;
-        Log.i("Info", semester);
+//        Log.i("Info", semester);
         fetchSubjectsName(semester, departmentName);
     }
 
@@ -65,7 +64,7 @@ public class SemesterActivity extends AppCompatActivity {
 
                     for(ParseObject obj: objects) {
                         nameOfSubjects.add(obj.getString("Subject_Name"));
-                        Log.i("Info", "subject " + obj.getString("Subject_Name"));
+//                        Log.i("Info", "subject " + obj.getString("Subject_Name"));
                     }
                     moveToSubjectActivity();
                 }

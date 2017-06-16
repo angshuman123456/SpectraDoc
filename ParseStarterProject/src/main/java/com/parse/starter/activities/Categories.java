@@ -46,11 +46,11 @@ public class Categories extends AppCompatActivity {
 
     private void setFileNamesList() {
 
-        Log.i("Info", "inside set file name list");
-        Log.i("Info", category);
-        Log.i("Info", subjectName);
-        Log.i("Info", department);
-        Log.i("Info", semester);
+//        Log.i("Info", "inside set file name list");
+//        Log.i("Info", category);
+//        Log.i("Info", subjectName);
+//        Log.i("Info", department);
+//        Log.i("Info", semester);
 
 
         // query the database and fill the fileNames onto fileNamesList

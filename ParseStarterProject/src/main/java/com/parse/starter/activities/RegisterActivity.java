@@ -12,7 +12,6 @@ package com.parse.starter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -112,12 +111,13 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void done(ParseException e) {
                     if(e == null) {
-                        Log.i("SignUp", "Successful");
-
+//                        Log.i("SignUp", "Successful");
+                        Toast.makeText(RegisterActivity.this, "Sign Up successful", Toast.LENGTH_SHORT).show();
                         Intent DepartmentIntent = new Intent(getApplicationContext(), Department.class);
                         startActivity(DepartmentIntent);
                     } else {
-                        Log.i("SignUp", "Failed");
+//                        Log.i("SignUp", "Failed");
+                        Toast.makeText(RegisterActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -126,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Password field does not match with confirm password", Toast.LENGTH_SHORT).show();
         }
-
 
 
         /* code below checks if all the fields are properly working

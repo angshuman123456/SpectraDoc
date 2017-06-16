@@ -3,7 +3,6 @@ package com.parse.starter.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,9 +39,9 @@ public class CategoryContent extends AppCompatActivity {
 
         fileNamesList = categoriesIntent.getStringArrayListExtra("fileNamesList");
 
-        for(String name: fileNamesList) {
-            Log.i("Subject name", name);
-        }
+//        for(String name: fileNamesList) {
+//            Log.i("Subject name", name);
+//        }
 
 
         categoryContent = (ListView) findViewById(R.id.categoryContent);

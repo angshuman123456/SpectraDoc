@@ -32,7 +32,7 @@ public class PdfCompression extends Compression {
     private String department;
     private  String category;
     private String semester;
-    private byte[] fileData;
+
 
     public PdfCompression(Context context, Uri selectedPDFFile, String fileName, String department,
                           String category, String semester) {
@@ -42,15 +42,16 @@ public class PdfCompression extends Compression {
         this.department = department;
         this.category = category;
         this.semester = semester;
+
     }
 
     public PdfCompression() {
 
     }
 
+
     @Override
     public void upload() {
-
         try {
 
             // convert the uri to file using an external third party jar file named commons-io-2.5.jar
@@ -61,7 +62,6 @@ public class PdfCompression extends Compression {
 
             // assertion that file path won't be null
             assert filePath != null;
-
             // creates a file object from the file located at filePath
             File pdfFile = new File(filePath);
 
@@ -82,7 +82,8 @@ public class PdfCompression extends Compression {
             }, new ProgressCallback() {
                 @Override
                 public void done(Integer percentDone) {
-                    Log.i("Percentage", String.valueOf(percentDone));
+                    // Log.i("Percentage", String.valueOf(percentDone));
+
                 }
             });
 
@@ -110,6 +111,7 @@ public class PdfCompression extends Compression {
 
     }
 
+
     @Override
     public void download(final String fileNameDownload) {
 
@@ -128,7 +130,8 @@ public class PdfCompression extends Compression {
                             public void done(byte[] data, ParseException e) {
                                 if (e == null && data.length > 0) {
                                     Log.i("Info", "we got the data ");
-                                    fileData = data;
+                                    byte[] fileData = data;
+                                    saveFile(fileData, fileNameDownload);
                                 }
                             }
                         }, new ProgressCallback() {
@@ -136,7 +139,6 @@ public class PdfCompression extends Compression {
                             public void done(Integer percentDone) {
                             }
                         });
-                        saveFile(fileData, fileNameDownload);
                     }
                 }
             }

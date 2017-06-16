@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -81,7 +80,7 @@ public class MemberLoginActivity extends AppCompatActivity {
                                 if (e == null && objects.size() > 0) {
                                     for (ParseUser obj : objects) {
                                         departmentName = obj.getString("Dept_Name");
-                                        Log.i("Info", departmentName);
+//                                        Log.i("Info", departmentName);
                                     }
                                 }
                             }
@@ -99,7 +98,7 @@ public class MemberLoginActivity extends AppCompatActivity {
                             public void done(List<ParseUser> objects, ParseException e) {
                                 if (e == null && objects.size() > 0) {
                                     MemberLoginActivity.studentUsername = objects.get(0).getString("username");
-                                    Log.i("Username for student", MemberLoginActivity.studentUsername);
+//                                    Log.i("Username for student", MemberLoginActivity.studentUsername);
                                     logInUser(studentUsername);
                                 } else {
                                     Toast.makeText(MemberLoginActivity.this, "Invalid Username/Password", Toast.LENGTH_SHORT).show();
@@ -116,14 +115,14 @@ public class MemberLoginActivity extends AppCompatActivity {
 
     private void logInUser(String userName) {
 
-        Log.i("Info", userName);
+//        Log.i("Info", userName);
 
         ParseUser.logInInBackground(userName, loginPassword.getText().toString(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                Log.d("Debug", "inside done method");
+//                Log.d("Debug", "inside done method");
                 if(user != null) {
-                    Log.d("Debug", "inside if");
+//                    Log.d("Debug", "inside if");
                     if(studentFacultySwitch.isChecked()) {
                         moveToFacultyActivity();
                     } else {

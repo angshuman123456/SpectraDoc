@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -115,7 +114,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 String selectedString = parent.getItemAtPosition(position).toString();
-                Toast.makeText(FacultyUploadActivity.this, selectedString, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(FacultyUploadActivity.this, selectedString, Toast.LENGTH_SHORT).show();
                 FacultyUploadActivity.this.assignValues(generalSpinner, selectedString);
                 if(generalSpinner.getId() == spinner_semester.getId()) {
                     fetchSubjects();
@@ -124,7 +123,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(FacultyUploadActivity.this, "Nothing was selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FacultyUploadActivity.this, "Selection cannot be empty", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -132,18 +131,18 @@ public class FacultyUploadActivity extends AppCompatActivity {
     // this method is used to assign the selected values of the spinner into their respected string variables
     public void assignValues(Spinner generalSpinner, String generalString) {
 
-        Log.i("Info", "inside assignValues");
+//        Log.i("Info", "inside assignValues");
 
         String generalSpinnerTag = generalSpinner.getTag().toString();
         if(generalSpinnerTag.equalsIgnoreCase("Category")) {
             selectedCategory = generalString;
-            Log.i("Info", selectedCategory);
+//            Log.i("Info", selectedCategory);
         } else if(generalSpinnerTag.equalsIgnoreCase("Subject")) {
             selectedSubject = generalString;
-            Log.i("Info", selectedSubject);
+//            Log.i("Info", selectedSubject);
         } else {
             selectedSemester = generalString;
-            Log.i("Info", selectedSemester);
+//            Log.i("Info", selectedSemester);
         }
     }
 
@@ -162,7 +161,7 @@ public class FacultyUploadActivity extends AppCompatActivity {
                 if(e == null && objects.size() > 0) {
 
                     for(ParseObject obj: objects) {
-                        subjects.add(obj.getString("Subject_Name"));
+                        subjects.add(obj.getString("Subject_Name") + "-" + obj.getString("Subject_Id"));
                     }
                     fillSpinners(spinner_subject, subjects);
                 }

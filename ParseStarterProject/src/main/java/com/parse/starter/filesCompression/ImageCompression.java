@@ -35,7 +35,8 @@ public class ImageCompression extends Compression {
     private String department;
     private String semester;
     private String subject;
-    private Bitmap img;
+
+
 
     public ImageCompression(Context context, Uri selectedImage, String fileName, String category,
                             String department, String semester, String subject) {
@@ -46,13 +47,15 @@ public class ImageCompression extends Compression {
         this.category = category;
         this.semester = semester;
         this.subject = subject;
+
     }
 
     public ImageCompression() {
-
     }
 
+
     public void upload() {
+
 
         try {
 
@@ -82,6 +85,7 @@ public class ImageCompression extends Compression {
             }, new ProgressCallback() {
                 @Override
                 public void done(Integer percentDone) {
+
                 }
             });
 
@@ -108,6 +112,8 @@ public class ImageCompression extends Compression {
         }
     }
 
+
+
     public void download(final String fileNameDownload) {
 
 
@@ -126,16 +132,16 @@ public class ImageCompression extends Compression {
                             public void done(byte[] data, ParseException e) {
                                 if (e == null && data.length > 0) {
                                     Log.i("Info", "we got the data ");
-                                     img = BitmapFactory.decodeByteArray(data, 0, data.length);
-
+                                    Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                    saveImage(img, fileNameDownload);
                                 }
                             }
                         }, new ProgressCallback() {
                             @Override
                             public void done(Integer percentDone) {
+                                Log.i("Info", String.valueOf(percentDone));
                             }
                         });
-                        saveImage(img, fileNameDownload);
                     }
                 }
             }
@@ -147,7 +153,7 @@ public class ImageCompression extends Compression {
     private void saveImage(Bitmap finalBitmap, String fileNameDownload) {
         String root = Environment.getExternalStorageDirectory().toString();
         Log.i("Root path", root);
-        File myDir = new File(root + "/download");
+        File myDir = new File(root + "/saved_image");
         myDir.mkdir();
         File file = new File(myDir, fileNameDownload);
         if(file.exists())

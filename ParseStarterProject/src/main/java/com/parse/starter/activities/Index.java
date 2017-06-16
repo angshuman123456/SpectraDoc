@@ -21,17 +21,8 @@ public class Index extends AppCompatActivity {
 
         logo = (ImageView) findViewById(R.id.logo);
 
-//        Animation animation = new AlphaAnimation(0.5f,1.0f);
-//        animation.setDuration(50);
-//        animation.setStartOffset(1000);
-//        animation.setRepeatMode(Animation.REVERSE);
-//        animation.setRepeatCount(Animation.INFINITE);
-
-
-
         Animation pulse = AnimationUtils.loadAnimation(Index.this, R.anim.pulse);
         logo.startAnimation(pulse);
-
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable(){
